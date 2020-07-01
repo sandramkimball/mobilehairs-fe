@@ -12,6 +12,7 @@ class Search extends React.Component {
                 year: 2004,
                 body: 'truck',
                 engine: '6 Cyl',
+                drive: 'RWD',
                 miles: 30000,
                 color: 'blue',
                 price: 12000,
