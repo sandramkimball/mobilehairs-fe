@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 
-function Post () {
+function Card () {
     const [posts, setPosts] = useState([])
     
     let cardTitle = `${props.year} ${props.make} ${props.model}`
@@ -18,4 +18,4 @@ function Post () {
     )
 }
 
-export default Post;
+export default Card;
