@@ -12,8 +12,24 @@ function FilterBar (props) {
         miles: null,
     })
     
-    let allMakes = props.cars.make.reduce()
-    let allModels = props.cars.makes.reduce()
+    const getMakes = (cars) => {
+        makes=[]
+        cars.map(car=> {
+            if(!makes[car.make]){ 
+                makes.push(car.make)
+            } 
+        })
+    }
+
+    const getModels = (cars) => {
+        models = []
+        cars.map(car=> {
+            if(car.make === options.make && !models[car.model]){
+                models.push(car.model)
+            }
+        })
+    }
+    
     let allPrices = props.cars.price.sort()
     let allYears = props.cars.years.sort()
     let allMiles = props.cars.miles.sort()
@@ -24,11 +40,6 @@ function FilterBar (props) {
 
     return (
         <section>
-            {/* <ul>
-                <li>Body Type</li>
-                <li>Engine</li>
-            </ul> */}
-
             <select id='new-or-used' onSelect={handleSelect()}>
                 <option name='isNew' value='null'>All</option>
                 <option name='isNew'value='true'>New</option>
