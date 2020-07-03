@@ -3,6 +3,8 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import { firebaseConfig } from './config'
 
+firebase.initializeApp(firebaseConfig);
+
 export const auth = firebase.auth()
 export const firestore = firebase.firestore()
 
@@ -18,13 +20,14 @@ export const handleUserProfile = async ({ userAuth, additionalData }) => {
     const snapshot = await userRef.get()
 
     if (!snapshot.exists){
-        const {displayName, email } = userAuth
+        const {firstName, lastName, email } = userAuth
         const timestamp = new Date()
         const userRoles = ['user']
 
         try {
             await userRef.set({
-                displayName, 
+                firstName,
+                lastName, 
                 email,
                 createdDate: timestamp, 
                 userRoles, 

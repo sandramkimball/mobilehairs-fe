@@ -14,7 +14,7 @@ export const setVehicles = vehicles => ({
     payload: vehicles
 })
 
-export const deleteVehiclesStart = vehicleID => ({
+export const deleteVehicleStart = vehicleID => ({
     type: vehiclesTypes.DELECTE_VEHICLE_START,
     payload: vehicleID
 })

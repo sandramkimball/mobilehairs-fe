@@ -1,23 +1,23 @@
 import { auth } from './../../firebase/utils'
 import { takeLatest, put, all, call } from 'redux-saga/effects'
-import { setVehicles, fetchVehicleStart } from './vehicles.actions'
+import { setVehicles, fetchVehiclesStart } from './vehicles.actions'
 import { handleAddVehicle, handleFetchVehicles, handleDeleteVehicle } from './vehicles.helpers'
 import vehiclesTypes from './vehicles.types'
 
 let vehiclePayload = [ 
-    make,
-    model,
-    drive,
-    price,
-    miles,
-    year,
-    body,
-    color,
-    transmission,
-    engine,
-    vin, 
-    description,
-    fuel
+    'make',
+    'model',
+    'drive',
+    'price',
+    'miles',
+    'year',
+    'body',
+    'color',
+    'transmission',
+    'engine',
+    'vin', 
+    'description',
+    'fuel'
 ]
 
 export function* addVehicle({ payload: vehiclePayload }) {
@@ -29,7 +29,7 @@ export function* addVehicle({ payload: vehiclePayload }) {
             createdDate: timestamp
         });
         yield put(
-            fetchVehicleStart()
+            fetchVehiclesStart()
         )
     } 
     catch(err){
@@ -42,7 +42,7 @@ export function* onAddVehicleStart(){
 
 export function* fetchVehicles(){
     try{
-        const vehicles = yield fetchVehicleStart();
+        const vehicles = yield fetchVehiclesStart();
         yield put(
             setVehicles(vehicles)
         )
@@ -59,7 +59,7 @@ export function* deleteVehicle({payload}){
     try{
         yield handleDeleteVehicle(payload)
         yield put (
-            fetchVehicleStart()
+            fetchVehiclesStart()
         )
     }
     catch(err){

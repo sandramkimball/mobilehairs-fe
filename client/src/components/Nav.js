@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Nav.css';
+import './Nav.scss';
 
 class Nav extends React.Component {
     constructor(props){
@@ -12,14 +12,16 @@ class Nav extends React.Component {
 
     render(){
         return (
-            <section>
-                <h4>Cut of Class</h4>
+            <nav>
+                <h4>Private Luxury Car Sales</h4>
                 <ul>
-                    <li>Home</li>
-                    <li>Locations</li>
-                    <li>Blog</li>
+                    <li><Link to='home'>Home</Link></li>
+                    <li><Link to='map'>Map</Link></li>
+                    <li><Link to='vehicle'>Vehicle</Link></li>
+                    <li><Link to='login'>Login</Link></li>
+                    <li><Link to='Registration'>Sign Up</Link></li>
                 </ul>
-            </section>
+            </nav>
         )
     }
 }

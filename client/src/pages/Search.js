@@ -25,7 +25,7 @@ class Search extends React.Component {
     render(){
         return (
             <section style={{display: 'flex'}}>
-                <FilterBar/>
+                <FilterBar props={this.state.vehicles}/>
                 {this.state.vehicles.map(car=> (
                     <Card props={car}/>
                 ))}

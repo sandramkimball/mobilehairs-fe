@@ -1,6 +1,6 @@
 import { firestore } from './../../firebase/utils'
 
-export const handleAddVehilce = vehicle => {
+export const handleAddVehicle = vehicle => {
     return new Promise((resolve, reject) => {
         firestore
         .collection('vehicles')
@@ -16,7 +16,7 @@ export const handleAddVehilce = vehicle => {
     })
 }
 
-export const handleFetchVehilces = () => {
+export const handleFetchVehicles = () => {
     return new Promise((resolve, reject) => {
         firestore
         .collection('vehicles')
@@ -36,7 +36,7 @@ export const handleFetchVehilces = () => {
     })
 }
 
-export const handleDeleteVehilce = documentID => {
+export const handleDeleteVehicle = documentID => {
     return new Promise((resolve, reject) => {
         firestore
         .collection('vehicles')

@@ -22,7 +22,7 @@ export const signOutUserSuccess = () => ({
     type: userTypes.SIGN_OUT_USER_SUCCESS
 })
 
-export const signUpUserStart = () => ({
+export const signUpUserStart = (userCredentials) => ({
     type: userTypes.SIGN_UP_USER_START,
     payload: userCredentials
 })
@@ -31,7 +31,7 @@ export const userError = err => ({
     type: userTypes.USER_ERROR
 })
 
-export const resetPasswordStart = () => ({
+export const resetPasswordStart = (userCredentials) => ({
     type: userTypes.RESET_PASS_START,
     payload: userCredentials
 })

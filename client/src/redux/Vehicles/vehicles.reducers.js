@@ -16,4 +16,4 @@ const vehiclesReducer = (state = INITIAL_STATE, action) => {
     }
 }
 
-export default vehicleReducer;
+export default vehiclesReducer;

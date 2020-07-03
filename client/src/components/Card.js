@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'
 
-function Card () {
-    const [posts, setPosts] = useState([])
-    
+function Card (props) {    
     let cardTitle = `${props.year} ${props.make} ${props.model}`
 
     return (
         <section>
-            <Link path to='Vehicle'>
+            <Link to={{pathname: '/Vehicle', state: {props} }}>
                 <h4>{cardTitle}</h4>
                 <img src={props.images[0]} alt={cardTitle}/>
                 <p>Price: ${props.price} ${props.price/60}/mo</p>

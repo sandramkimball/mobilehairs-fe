@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RangeSlider from './Slider';
 
-function FilterBar (props) {
+function FilterBar ({vehicles}) {
     const [options, setOptions] = useState({
         isNew: null,
         make: null,
@@ -12,27 +12,27 @@ function FilterBar (props) {
         miles: null,
     })
     
-    const getMakes = (cars) => {
-        makes=[]
-        cars.map(car=> {
-            if(!makes[car.make]){ 
-                makes.push(car.make)
-            } 
-        })
-    }
+    // const getMakes = (cars) => {
+    //     carMakes=[]
+    //     cars.map(car=> {
+    //         if(!carMakes[car.make]){ 
+    //             carMakes.push(car.make)
+    //         } 
+    //     })
+    // }
 
-    const getModels = (cars) => {
-        models = []
-        cars.map(car=> {
-            if(car.make === options.make && !models[car.model]){
-                models.push(car.model)
-            }
-        })
-    }
+    // const getModels = (cars) => {
+    //     carModels = []
+    //     cars.map(car=> {
+    //         if(car.make === options.make && !carModels[car.model]){
+    //             carModels.push(car.model)
+    //         }
+    //     })
+    // }
     
-    let allPrices = props.cars.price.sort()
-    let allYears = props.cars.years.sort()
-    let allMiles = props.cars.miles.sort()
+    let allPrices = vehicles.price.sort()
+    let allYears = vehicles.years.sort()
+    let allMiles = vehicles.miles.sort()
 
     const handleSelect = e => {
         setOptions({ [e.target.name]: e.target.value})
@@ -47,14 +47,14 @@ function FilterBar (props) {
             </select>
 
             <select id='make' onSelect={handleSelect()}>
-                {props.cars.allMakes.map(make=> (
+                {vehicles.allMakes.map(make=> (
                     <option name='make' value={make}>{make}</option>
                 ))}
             </select> 
 
             {options.make != null && (
                 <select id='model' onSelect={handleSelect()}>
-                    {props.cars.model.map(model => (
+                    {vehicles.model.map(model => (
                         <option>{model}</option>
                 ))}
             </select>)}

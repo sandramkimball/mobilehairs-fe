@@ -7,13 +7,13 @@ function RangeSlider(props){
     let sliderId = props.rangeType
     
     return (
-        <div class="slide-container">
+        <div className="slide-container">
             <input 
                 type="range" 
                 min={min} 
                 max={max} 
                 value={min} 
-                class="slider" 
+                className="slider" 
                 id={sliderId}
             />
             <input 
@@ -21,7 +21,7 @@ function RangeSlider(props){
                 min={min} 
                 max={max} 
                 value={max} 
-                class="slider" 
+                className="slider" 
                 id={sliderId}
             />
         </div>

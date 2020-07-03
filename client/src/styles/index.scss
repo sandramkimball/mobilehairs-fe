@@ -1,0 +1,48 @@
+
+$hover-color: #bbbcc2;
+$drk-grayblue: #2b2c35;
+
+$btn-h: 40px;
+$btn-w: 80px;
+
+$font-1: 'Cardo', serif;
+$font-2: 'Playfair Display', serif;
+$font-3: 'Exo 2', sans-serif;
+$font-4: 'PT Sans Narrow', sans-serif;
+
+@mixin button-1 {
+    background: none;
+    height: 40px;
+    width: 80px;
+    border: 1.5px solid #fff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: $font-3;
+    padding-top: 0;
+    margin-top: 5px;       
+}
+
+@mixin button-hover{
+    color: $hover-color; 
+    border: 1.5px solid $hover-color
+}
+
+@mixin Google-button{
+    display: inline-block;
+    background: white;
+    color: #444;
+    width: 190px;
+    border-radius: 5px;
+    border: thin solid #888;
+    box-shadow: 1px 1px 1px grey;
+    white-space: nowrap;
+}
+
+@mixin Google-icon{
+    background: url('/identity/sign-in/g-normal.png') transparent 5px 50% no-repeat;
+    display: inline-block;
+    vertical-align: middle;
+    width: 42px;
+    height: 42px;
+}

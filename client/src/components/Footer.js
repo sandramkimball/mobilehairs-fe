@@ -14,15 +14,13 @@ class Footer extends React.Component {
             <footer style={{display: 'flex'}}>
                 <ul>
                     <li>Home</li>
-                    <li>Visit</li>
                     <li>Social</li>
                     <li>Search</li>
                 </ul>
                 <ul>
                     <li>1.234.567.8910</li>
-                    <li>queries@cutofclass.com</li>
+                    <li>queries@luxcarsales.com</li>
                 </ul>
-
             </footer>
         )
     }
