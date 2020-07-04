@@ -17,7 +17,7 @@ class Nav extends React.Component {
                 <ul>
                     <li><Link to='home'>Home</Link></li>
                     <li><Link to='map'>Map</Link></li>
-                    <li><Link to='vehicle'>Vehicle</Link></li>
+                    <li><Link to='search'>Search</Link></li>
                     <li><Link to='login'>Login</Link></li>
                     <li><Link to='Registration'>Sign Up</Link></li>
                 </ul>

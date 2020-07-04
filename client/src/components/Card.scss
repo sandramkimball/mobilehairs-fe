@@ -1,0 +1,41 @@
+@import '../styles/index.scss';
+
+.vehicle-card{
+    height: 280px;
+    width: 260px;
+    border: 1px solid gray;
+    text-align: left;
+    padding: 5px;
+    background: #f8f8f8;
+    a {
+        text-decoration: none;
+        color: #000;
+        font-family: $font-3;
+    }
+    img{
+        object-fit: cover;
+        width: 100%;
+    }
+    h4{ 
+        font-weight: 600;
+    }
+    p{ 
+        padding-top: 4px;
+    }
+    .price{
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        background-color: #76e676b4;
+        padding: 2px 1px;
+        p:nth-child(2){
+            font-size: 14px;
+            color: gray
+        }
+    }
+}
+
+.vehicle-card:hover{
+    background-color: #fff;
+    cursor: pointer;
+}

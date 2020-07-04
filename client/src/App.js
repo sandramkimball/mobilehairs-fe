@@ -14,9 +14,6 @@ import Login from './pages/Login';
 import Registration from './pages/Registration';
 
 
-let searchValue = 'mazda'
-const searchRoute = `/search-${searchValue}`
-
 function App() {
     return (
         <div className='App'>
@@ -25,7 +22,7 @@ function App() {
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route path='/map' component={Map}/>
-                    <Route path={searchRoute} component={Search}/>
+                    <Route path='/search' component={Search}/>
                     <Route path='/vehicles' component={VehicleDetails}/>
                     <Route path='/login' component={Login}/>
                     <Route path='/registration' component={Registration}/>

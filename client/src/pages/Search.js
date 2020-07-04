@@ -1,6 +1,7 @@
 import React from 'react'
 import Card from '../components/Card'
 import FilterBar from '../components/FilterBar'
+import './Search.scss'
 
 class Search extends React.Component {
     constructor(props){
@@ -24,11 +25,16 @@ class Search extends React.Component {
 
     render(){
         return (
-            <section style={{display: 'flex'}}>
-                <FilterBar props={this.state.vehicles}/>
-                {this.state.vehicles.map(car=> (
-                    <Card props={car}/>
-                ))}
+            <section className='search-pg'>
+                <div className='banner-s'></div>
+                <div className='search-container'>
+                    <FilterBar vehicles={this.state.vehicles}/>
+                    <div className='results-container'>
+                        {this.state.vehicles.map(car=> (
+                            <Card car={car}/>
+                        ))}
+                    </div>
+                </div>
             </section>
         )
     }

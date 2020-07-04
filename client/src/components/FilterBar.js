@@ -10,68 +10,77 @@ function FilterBar ({vehicles}) {
         price: null,
         body: null,
         miles: null,
+        maxMiles: null,
+        maxPrice: null,
+        maxYears: null
     })
     
-    // const getMakes = (cars) => {
-    //     carMakes=[]
-    //     cars.map(car=> {
-    //         if(!carMakes[car.make]){ 
-    //             carMakes.push(car.make)
-    //         } 
-    //     })
-    // }
-
-    // const getModels = (cars) => {
-    //     carModels = []
-    //     cars.map(car=> {
-    //         if(car.make === options.make && !carModels[car.model]){
-    //             carModels.push(car.model)
-    //         }
-    //     })
-    // }
-    
-    let allPrices = vehicles.price.sort()
-    let allYears = vehicles.years.sort()
-    let allMiles = vehicles.miles.sort()
+    useEffect(()=> {
+        vehicles.map(car=> {
+            if(car.price > options.maxPrice){
+                setOptions({maxPrice: car.price})
+            }
+            if(car.miles > options.maxMiles){
+                setOptions({maxPrice: car.miles})
+            }
+            if(car.year > options.maxYear){
+                setOptions({maxPrice: car.year})
+            }
+        })
+    }, [vehicles])
 
     const handleSelect = e => {
-        setOptions({ [e.target.name]: e.target.value})
+        setOptions({ ...options, [e.target.name]: e.target.value})
     }
 
     return (
-        <section>
-            <select id='new-or-used' onSelect={handleSelect()}>
-                <option name='isNew' value='null'>All</option>
-                <option name='isNew'value='true'>New</option>
-                <option name='isNew'value='false'>Used</option>
+        <section className='filter-bar'>
+            <p>New or Used?</p>
+            <select id='new-or-used' name='isNew' onSelect={handleSelect}>
+                <option value='null'>All</option>
+                <option value='true'>New</option>
+                <option value='false'>Used</option>
             </select>
 
-            <select id='make' onSelect={handleSelect()}>
-                {vehicles.allMakes.map(make=> (
-                    <option name='make' value={make}>{make}</option>
+            <p>Make</p>
+            <select id='make' onSelect={handleSelect}>
+                <option name='make' value={null}>All</option>
+                {vehicles.map(car=> (
+                    <option name='make' value={car.make}>{car.make}</option>
                 ))}
             </select> 
 
             {options.make != null && (
-                <select id='model' onSelect={handleSelect()}>
-                    {vehicles.model.map(model => (
-                        <option>{model}</option>
-                ))}
-            </select>)}
-
+                <>
+                    <p>Model</p>
+                    <select id='model' name='model' onSelect={handleSelect}>
+                        {vehicles.map(car => (
+                            <option value={car.model}>{car.model}</option>
+                    ))}
+                    </select>
+                </>
+            )}
             
-            <select id='color' onSelect={handleSelect()}>
-                <option name='color'value='null'>Any</option>
-                <option name='color' value='blue'>Blue</option>
-                <option name='color'value='red'>Red</option>
-                <option name='color'value='black'>Black</option>
-                <option name='color'value='yellow'>Yellow</option>
-                <option name='color'value='white'>White</option>
+            <p>Color</p>
+            <select id='color' name='color' onSelect={handleSelect}>
+                <option value='null'>Any</option>
+                <option value='blue'>Blue</option>
+                <option value='red'>Red</option>
+                <option value='black'>Black</option>
+                <option value='yellow'>Yellow</option>
+                <option value='white'>White</option>
             </select>
 
-            <RangeSlider min={allPrices[0].price} max={allPrices[-1].price} rangeType={'Price'} />
-            <RangeSlider min={allMiles[0].miles} max={allMiles[-1].miles} rangeType={'Miles'} />
-            <RangeSlider min={allYears[0].year} max={allYears[-1].year} rangeType={'Year'} />
+            <p>Price</p>
+            <RangeSlider max={options.maxPrice} rangeType={'Price'} />
+
+            <p>Miles</p>
+            <RangeSlider max={options.maxMiles} rangeType={'Miles'} />
+
+            <p>Year</p>
+            <RangeSlider max={options.maxYears} rangeType={'Year'} />
+
+            <button type='submit'>Submit</button>
         </section>
     )
 }
