@@ -30,6 +30,7 @@ class VehicleDetails extends React.Component {
     render(){
         return (
             <section className='vehicle-details'>
+                <div className='banner'/>
                 <div className='return'><Link path to='/Search'>Back to Results</Link></div>
                 
                 <section className='gallery'>   

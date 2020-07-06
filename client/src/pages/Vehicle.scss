@@ -3,13 +3,13 @@
 .vehicle-details{
     text-align: left;
     font-family: $font-3;
+    .banner{@include banner-primary }
     .return{
-        background-color: $drk-grayblue;
-        width: 100%;
-        height: 50px;
+        padding: 15px;
         a{
             text-decoration: none;
-            color: #fff;
+            color: #000;
+            cursor: pointer;
         }
     }    
 }

@@ -75,3 +75,9 @@ $font-4: 'PT Sans Narrow', sans-serif;
     font-family: $font-3;
     text-align-last: center;
 }
+
+@mixin banner-primary{
+    background-color: $drk-grayblue;
+    width: 100%;
+    height: 50px;
+}
