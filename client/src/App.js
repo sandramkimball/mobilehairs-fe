@@ -23,7 +23,7 @@ function App() {
                     <Route exact path='/' component={Home}/>
                     <Route path='/map' component={Map}/>
                     <Route path='/search' component={Search}/>
-                    <Route path='/vehicles' component={VehicleDetails}/>
+                    <Route path='/vehicle' component={VehicleDetails}/>
                     <Route path='/login' component={Login}/>
                     <Route path='/registration' component={Registration}/>
                 </Switch>

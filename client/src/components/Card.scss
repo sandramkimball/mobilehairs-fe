@@ -1,22 +1,23 @@
 @import '../styles/index.scss';
 
 .vehicle-card{
-    height: 280px;
+    height: 340px;
     width: 260px;
     border: 1px solid gray;
-    text-align: left;
     padding: 5px;
     background: #f8f8f8;
-    a {
-        text-decoration: none;
-        color: #000;
-        font-family: $font-3;
-    }
+    text-decoration: none;
+    color: #000;
+    font-family: $font-3;
+    display: flex;
+    flex-direction: column;
     img{
         object-fit: cover;
         width: 100%;
+        padding-bottom: 10px;
     }
     h4{ 
+        font-size: 18px;
         font-weight: 600;
     }
     p{ 
@@ -25,13 +26,33 @@
     .price{
         display: flex;
         align-items: baseline;
-        justify-content: space-between;
-        background-color: #76e676b4;
-        padding: 2px 1px;
-        p:nth-child(2){
+        justify-content: space-evenly;
+        padding: 15px;
+        div{
+            flex-direction: column;
+        }
+        div:nth-child(2){
+            border-left: 1px solid gray;
+            border-right: 1px solid gray;
+            padding: 0 10px;
+        }
+        p{
             font-size: 14px;
             color: gray
         }
+    }
+    a button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 650;
+        padding: 10px;
+        font-family: $font-3;
+    }
+    a button:hover{
+        color: $hover-color2;
+        transform: scale(1.025);
     }
 }
 

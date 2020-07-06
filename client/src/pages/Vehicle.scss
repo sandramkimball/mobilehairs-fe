@@ -1,0 +1,102 @@
+@import '../styles/index.scss';
+
+.vehicle-details{
+    text-align: left;
+    font-family: $font-3;
+    .return{
+        background-color: $drk-grayblue;
+        width: 100%;
+        height: 50px;
+        a{
+            text-decoration: none;
+            color: #fff;
+        }
+    }    
+}
+
+.gallery{
+    display: flex;
+    width: 80%;
+    height: 25vw;
+    margin: 20px auto;
+    border-bottom: 1px solid $hover-color;
+    img{ 
+        height: 100%;
+        width: 40vw;
+        object-fit: cover;
+    }
+}
+
+.gallery .vehicle-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 80%;
+    height: 100%;
+    font-size: 18px;
+    padding: 20px;
+    h1{ font-size: 28px; }
+    th:nth-child(1){
+        width: 20%;
+        color: $hover-color2;
+    }
+    th:nth-child(2){
+        width: 45%;
+    }
+    //table div and buttons div
+    div{
+        display: flex;
+        justify-content: flex-start;
+        button{ @include button-3; margin-right: 10px;}
+        button:hover{ @include button-hover-2}
+    }
+}
+
+.calculator{
+    width: 80%;
+    height: 40vh;
+    margin: 20px auto;
+    border: 1px solid $hover-color;
+    display: flex;
+    justify-content: space-between;
+    h2{
+        font-size: 24px;
+    }
+    div{ 
+        border: none; 
+        width: 45%;
+        margin: auto;
+    }
+    input{ 
+        @include primary-input;
+        width: 50%;    
+        margin: 10px auto;    
+    }
+    select{ 
+        @include primary-select;   
+        width: 50%;   
+        margin: 10px auto;         
+    }
+    .monthly-payment{
+        margin: auto;
+        text-align: center;
+        margin: center;
+        font-size: 24px;
+        padding: 10% 0; 
+    }
+}
+
+.features{
+    margin: 20px auto;
+    width: 80%;
+    font-size: 18px;
+    border-bottom: 1px solid $hover-color;
+    h4{ 
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 20px
+    }
+    li{
+        padding: 10px 0;
+    }
+}

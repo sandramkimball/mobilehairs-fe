@@ -7,12 +7,13 @@ function FilterBar ({vehicles}) {
         make: null,
         model: null,
         year: null,
-        price: null,
         body: null,
-        miles: null,
-        maxMiles: null,
+        minPrice: null,
         maxPrice: null,
-        maxYears: null
+        minMiles: null,
+        maxMiles: null,
+        minYear: null,
+        maxYear: null
     })
     
     useEffect(()=> {
@@ -32,6 +33,7 @@ function FilterBar ({vehicles}) {
     const handleSelect = e => {
         setOptions({ ...options, [e.target.name]: e.target.value})
     }
+
 
     return (
         <section className='filter-bar'>
@@ -72,13 +74,55 @@ function FilterBar ({vehicles}) {
             </select>
 
             <p>Price</p>
-            <RangeSlider max={options.maxPrice} rangeType={'Price'} />
+            <div className='option-range'>
+                <input 
+                    type='text'
+                    name='minPrice'
+                    value={options.minPrice}
+                    placeholder='0'
+                />
+                <p>to</p>
+                <input 
+                    type='text'
+                    name='maxPrice'
+                    value={options.maxPrice}
+                    placeholder='0'
+                />
+            </div>
 
             <p>Miles</p>
-            <RangeSlider max={options.maxMiles} rangeType={'Miles'} />
+            <div className='option-range'>
+                <input 
+                    type='text'
+                    name='minMiles'
+                    value={options.minMiles}
+                    placeholder='0'
+                />
+                <p>to</p>
+                <input 
+                    type='text'
+                    name='maxMiles'
+                    value={options.maxMiles}
+                    placeholder='0'
+                />
+            </div>
 
             <p>Year</p>
-            <RangeSlider max={options.maxYears} rangeType={'Year'} />
+            <div className='option-range'>
+                <input 
+                    type='text'
+                    name='minYear'
+                    value={options.minYear}
+                    placeholder='0'
+                />
+                <p>to</p>
+                <input 
+                    type='text'
+                    name='maxYear'
+                    value={options.maxYear}
+                    placeholder='0'
+                />
+            </div>
 
             <button type='submit'>Submit</button>
         </section>
