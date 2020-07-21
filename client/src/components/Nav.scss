@@ -2,12 +2,11 @@
 
 nav{
     padding: 15px 0;
-    position: fixed;
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: baseline;
-    color: #fff;
+    background-color: #fff;
     h4{ 
         font-size: 20px;
         padding: 0 10px;
@@ -16,21 +15,48 @@ nav{
     }
     ul{ 
         display: flex;
+        justify-content: space-evenly;
         font-family: $font-2;
+        width: 40%;
     }
-    li a{
+    a{
         text-decoration: none;
-        padding: 0 10px;
-        color: #fff;
+        color: #000;
+        font-family: $font-3;
     }
     h4:hover, li a:hover{color: $hover-color}
+}
+
+.sub-list{
+    width: 100%;
+    font-family: $font-3;
+    height: 230px;  
+    background-color: #e2e2e2;
+    position: absolute;
+    display: flex;
+    padding-left: 58%;
+    h4{
+        font-weight: 650;
+    }
+    ul{
+        margin: 10px;
+        text-align: left;
+    }
+    li{
+        margin: 15px 0;
+    }
+    a{ 
+        text-decoration: none;
+        margin: 20px 0;
+        color: #000;
+    }
+    a:hover{color: #fff}
 }
 
 footer{
     width: 100%;
     height: 10vh;
-    background-color: #2b2c35;
-    color: #fff;
+    background-color: #fff;
     flex-direction: center;
     margin-top: 50%;
     font-family: $font-3;

@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 
 //Pages
 import Map from './pages/Map';
+import About from './pages/About';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import VehicleDetails from './pages/VehicleDetails';
@@ -20,8 +21,9 @@ function App() {
             <Router>
                 <Nav/>
                 <Switch>
-                    <Route exact path='/' component={Home}/>
+                    <Route exact path='/home' component={Home}/>
                     <Route path='/map' component={Map}/>
+                    <Route path='/about' component={About}/>
                     <Route path='/search' component={Search}/>
                     <Route path='/vehicle' component={VehicleDetails}/>
                     <Route path='/login' component={Login}/>

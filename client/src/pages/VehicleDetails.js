@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import './Vehicle.scss';
 import defaultImage from '../assets/car-1.jpg'
 import PaymentCalculator from '../components/Calculator'
+//Icons
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
 class VehicleDetails extends React.Component {
     constructor(props){
@@ -30,8 +33,10 @@ class VehicleDetails extends React.Component {
     render(){
         return (
             <section className='vehicle-details'>
-                <div className='banner'/>
-                <div className='return'><Link path to='/Search'>Back to Results</Link></div>
+                <div className='sub-banner'>
+                    <h3><Link to='/search'> <FontAwesomeIcon icon={faChevronLeft}/>Back to Results</Link></h3>
+                   
+                </div>
                 
                 <section className='gallery'>   
                     <img src={defaultImage} alt={this.state.image}/>  

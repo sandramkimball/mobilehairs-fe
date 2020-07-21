@@ -56,8 +56,8 @@
         height: 100%;
         width: 100%;
     }
-    .category.overlay:hover{ 
-        background-color: none
+    .overlay:hover{ 
+        background-color: #00000000;
     }
     .category{
         height: 30vh;
@@ -65,7 +65,12 @@
         position: relative;
         background-size: cover;
         background-repeat: no-repeat;
-        background-position: center center;        
+        background-position: center center;
+        overflow: hidden;        
+    }
+    .tag1:hover{
+        transform: scale(1.3);
+        transition: .3s;
     }
     .tag1{ background-image: url('../assets/car-4.jpg') }
     .tag2{ background-image: url('../assets/car-3.jpg') }
