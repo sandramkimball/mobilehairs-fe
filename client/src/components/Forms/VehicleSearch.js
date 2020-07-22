@@ -12,7 +12,7 @@ const VehicleSearch = () => {
     const history = useHistory()
     const handleSubmit = e => {
         console.log('handle submit')
-        // history.push('/search')
+        history.push('/search')
     }
 
     const handleSelect = e => {

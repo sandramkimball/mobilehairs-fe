@@ -31,16 +31,19 @@ nav{
     width: 100%;
     font-family: $font-3;
     height: 230px;  
-    background-color: #e2e2e2;
+    background-color: #e2e2e2d8;
     position: absolute;
     display: flex;
-    padding-left: 58%;
+    z-index: -2;
     h4{
         font-weight: 650;
     }
     ul{
         margin: 10px;
         text-align: left;
+    }
+    ul:nth-child(1){
+        margin-left: 57vw;
     }
     li{
         margin: 15px 0;

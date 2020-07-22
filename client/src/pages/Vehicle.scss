@@ -37,6 +37,30 @@
     }
 }
 
+.sort-by{
+    position: absolute;
+    right: 10px;
+    border-bottom: 1px solid $hover-color2;
+    display: flex;
+    height: 40px;
+    p{ 
+        color: #000;
+        padding: 1px 4px 0px;
+        margin: auto;
+        font-family: $font-3;  
+    }
+    select{
+        background: none;
+        border: none; 
+        font-family: $font-3;  
+        font-size: 16px;     
+        padding-bottom: 0;
+    }
+    .select-items{ 
+        background: none;
+    }
+}
+
 .gallery .vehicle-info{
     display: flex;
     flex-direction: column;

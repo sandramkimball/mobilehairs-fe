@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import RangeSlider from './Slider';
+import './FilterBar.scss';
 
 function FilterBar ({vehicles}) {
+    const [isSelected, setIsSelected] = useState('')
     const [options, setOptions] = useState({
         isNew: null,
         make: null,
         model: null,
         year: null,
         body: null,
+        color: null,
         minPrice: null,
         maxPrice: null,
         minMiles: null,
@@ -31,47 +33,66 @@ function FilterBar ({vehicles}) {
     }, [vehicles])
 
     const handleSelect = e => {
-        setOptions({ ...options, [e.target.name]: e.target.value})
+        setOptions({ [e.target.name]: e.target.value})
     }
 
+    const handleColorCheck = e => {
+        isSelected==='selected' ? setIsSelected('') : setIsSelected('selected')
+    }
+
+    const colorsList = ['Blue', 'Yellow', 'Red', 'Green', 'Black', 'White', 'Brown', 'Tan', 'Silver', 'Multi']
 
     return (
         <section className='filter-bar'>
             <p>New or Used?</p>
-            <select id='new-or-used' name='isNew' onSelect={handleSelect}>
-                <option value='null'>All</option>
+            <select onChange={handleSelect} value={options.isNew}>
+                <option value={null}>All</option>
                 <option value='true'>New</option>
                 <option value='false'>Used</option>
             </select>
 
             <p>Make</p>
-            <select id='make' onSelect={handleSelect}>
+            <select onSelect={handleSelect} value={options.make}>
                 <option name='make' value={null}>All</option>
                 {vehicles.map(car=> (
                     <option name='make' value={car.make}>{car.make}</option>
                 ))}
             </select> 
-
-            {options.make != null && (
-                <>
-                    <p>Model</p>
-                    <select id='model' name='model' onSelect={handleSelect}>
-                        {vehicles.map(car => (
-                            <option value={car.model}>{car.model}</option>
-                    ))}
-                    </select>
-                </>
-            )}
-            
-            <p>Color</p>
-            <select id='color' name='color' onSelect={handleSelect}>
-                <option value='null'>Any</option>
-                <option value='blue'>Blue</option>
-                <option value='red'>Red</option>
-                <option value='black'>Black</option>
-                <option value='yellow'>Yellow</option>
-                <option value='white'>White</option>
+           
+            <p>Model</p>
+            <select onSelect={handleSelect} value={options.model}> 
+                {options.make == null && (
+                    <option>--</option>
+                )}
+                {options.make != null && vehicles.map(car => (
+                    <option value={car.model}>{car.model}</option>
+                ))}
             </select>
+
+            <p>Color</p>
+            <fieldset className='select-color-checkboxes'>
+                <div className='list-container'>
+                    <ul value={options.color}>
+                        <li className={isSelected} onClick={handleColorCheck}>
+                            <input value='null' type='checkbox'/>
+                            <label>
+                                <div style={{backgroundColor:'white'}} className='color-box'/>
+                                <span>Any</span>
+                            </label>
+                        </li>
+                        
+                        {colorsList.map((color, index)=> (
+                            <li key={index} className={isSelected} onClick={handleColorCheck}>
+                                <input value={color.toLowerCase()} type='checkbox'/>
+                                <label>
+                                    <div style={{backgroundColor:color}} className='color-box'/>
+                                    <span>{color}</span>
+                                </label>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            </fieldset>
 
             <p>Price</p>
             <div className='option-range'>
@@ -123,8 +144,6 @@ function FilterBar ({vehicles}) {
                     placeholder='0'
                 />
             </div>
-
-            <button type='submit'>Submit</button>
         </section>
     )
 }

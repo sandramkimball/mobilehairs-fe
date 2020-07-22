@@ -47,10 +47,10 @@ class Nav extends React.Component {
                 <ul>
                     <h4>Explore</h4>
                     <li><Link to='search'>Inventory</Link></li>
-                    <li><Link to='search'>Models</Link></li>
-                    <li><Link to='search'>Sports</Link></li>
-                    <li><Link to='search'>Off Road</Link></li>
-                    <li><Link to='search'>Classic</Link></li>
+                    <li><Link to='search' year={2020}>New</Link></li>
+                    <li><Link to='search' tag={'sport'}>Sports</Link></li>
+                    <li><Link to='search' tag={'off-road'}>Off Road</Link></li>
+                    <li><Link to='search' tag={'classig'}>Classic</Link></li>
                 </ul>
             </div>
             </>
