@@ -14,13 +14,11 @@ class Nav extends React.Component {
     }
 
     handleHover = e => {
-        console.log('Explore')
-        this.setState({subDisplay: 1})
+        this.setState({subDisplay: 'flex'})
     }
 
     handleMouseLeave = e => {
-        console.log('bye')
-        this.setState({subDisplay: 0})
+        this.setState({subDisplay: 'none'})
     }
 
     render(){
@@ -33,10 +31,11 @@ class Nav extends React.Component {
                     <li onMouseEnter={this.handleHover}><Link to='map'>About</Link></li>
                     <li onMouseEnter={this.handleHover}><Link to='search'>Explore</Link></li>
                     <li><Link to='login'>Login</Link></li>
+                    {/* {!user && <li><Link to='login'>Logout</Link></li>} */}
                     <li><Link to='Registration'>Sign Up</Link></li>
                 </ul>
             </nav>
-            <div className='sub-list' style={{opacity: this.state.subDisplay}} onMouseLeave={this.handleMouseLeave}>
+            <div className='sub-list' style={{display: this.state.subDisplay}} onMouseLeave={this.handleMouseLeave}>
                 <ul>
                     <h4>About</h4>
                     <li><Link to='about'>Mission</Link></li>

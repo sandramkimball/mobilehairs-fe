@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './FilterBar.scss';
 
-function FilterBar ({vehicles}) {
+function FilterBar (props) {
     const [isSelected, setIsSelected] = useState('')
     const [options, setOptions] = useState({
-        isNew: null,
-        make: null,
-        model: null,
+        isNew: props.options.isNew || null,
+        make: props.options.make || null,
+        model: props.options.model || null,
         year: null,
         body: null,
         color: null,
-        minPrice: null,
-        maxPrice: null,
+        minPrice: props.options.minPrice || null,
+        maxPrice: props.options.maxPrice || null,
         minMiles: null,
         maxMiles: null,
         minYear: null,
@@ -19,31 +19,44 @@ function FilterBar ({vehicles}) {
     })
     
     useEffect(()=> {
-        vehicles.map(car=> {
-            if(car.price > options.maxPrice){
-                setOptions({maxPrice: car.price})
-            }
-            if(car.miles > options.maxMiles){
-                setOptions({maxPrice: car.miles})
-            }
-            if(car.year > options.maxYear){
-                setOptions({maxPrice: car.year})
-            }
-        })
-    }, [vehicles])
+        console.log('FilterBar Options', props.options)
+    }, [props.vehicles])
 
     const handleSelect = e => {
         setOptions({ [e.target.name]: e.target.value})
     }
-
+    
+    const handleReset = e => {
+        setOptions({
+            isNew: null,
+            make: null,
+            model: null,
+            minPrice: 0,
+            maxPrice: 10000,
+        })
+    }
+    
     const handleColorCheck = e => {
         isSelected==='selected' ? setIsSelected('') : setIsSelected('selected')
     }
 
-    const colorsList = ['Blue', 'Yellow', 'Red', 'Green', 'Black', 'White', 'Brown', 'Tan', 'Silver', 'Multi']
+    const colorsList = [
+        'All', 
+        'Blue', 
+        'Yellow', 
+        'Red', 
+        'Green', 
+        'Black', 
+        'White', 
+        'Brown', 
+        'Tan', 
+        'Silver', 
+        'Multi'
+    ]
 
     return (
         <section className='filter-bar'>
+            {/* Dropdown options */}
             <p>New or Used?</p>
             <select onChange={handleSelect} value={options.isNew}>
                 <option value={null}>All</option>
@@ -54,7 +67,7 @@ function FilterBar ({vehicles}) {
             <p>Make</p>
             <select onSelect={handleSelect} value={options.make}>
                 <option name='make' value={null}>All</option>
-                {vehicles.map(car=> (
+                {props.vehicles.map(car=> (
                     <option name='make' value={car.make}>{car.make}</option>
                 ))}
             </select> 
@@ -64,23 +77,16 @@ function FilterBar ({vehicles}) {
                 {options.make == null && (
                     <option>--</option>
                 )}
-                {options.make != null && vehicles.map(car => (
+                {options.make != null && props.vehicles.map(car => (
                     <option value={car.model}>{car.model}</option>
                 ))}
             </select>
 
+            {/* Checkbox options */}
             <p>Color</p>
             <fieldset className='select-color-checkboxes'>
                 <div className='list-container'>
-                    <ul value={options.color}>
-                        <li className={isSelected} onClick={handleColorCheck}>
-                            <input value='null' type='checkbox'/>
-                            <label>
-                                <div style={{backgroundColor:'white'}} className='color-box'/>
-                                <span>Any</span>
-                            </label>
-                        </li>
-                        
+                    <ul value={options.color}>                        
                         {colorsList.map((color, index)=> (
                             <li key={index} className={isSelected} onClick={handleColorCheck}>
                                 <input value={color.toLowerCase()} type='checkbox'/>
@@ -94,6 +100,7 @@ function FilterBar ({vehicles}) {
                 </div>
             </fieldset>
 
+            {/* Range Sliders */}
             <p>Price</p>
             <div className='option-range'>
                 <input 
@@ -144,6 +151,9 @@ function FilterBar ({vehicles}) {
                     placeholder='0'
                 />
             </div>
+        
+            <button type='submit'>Submit</button>
+            <button onClick={handleReset}>Reset</button>
         </section>
     )
 }
