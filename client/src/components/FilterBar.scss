@@ -29,6 +29,21 @@
     }
 }
 
+button{ 
+    @include button-3;
+    width: 8vw;
+    margin: 0 5px;
+};
+button:nth-child(1){
+    background: none;
+    color: $drk-grayblue;
+    border: 1.5px solid $drk-grayblue;
+}
+button:hover{
+    transform: scale(1.02);
+}
+
+
 .select-color-checkboxes{
     font-family: $font-3;
     .list-container{

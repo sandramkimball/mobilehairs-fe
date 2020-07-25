@@ -123,7 +123,7 @@ const SignUp = props => {
                     placeholder='Confirm Password'
                     onChange={handleChange}
                 />
-                <button type='submit'>Register</button>
+                <button type='submit'>Submit</button>
                 <div className='links'>
                     <Link to='/login'>Sign In</Link>
                 </div>

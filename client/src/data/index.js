@@ -9,6 +9,20 @@ export let dropdownOpt = [
     {'color': ['black', 'blue', 'red', 'white', 'gray', 'yellow', 'tan', 'other']}
 ]
 
+export let colorsList = [
+    'All', 
+    'Blue', 
+    'Yellow', 
+    'Red', 
+    'Green', 
+    'Black', 
+    'White', 
+    'Brown', 
+    'Tan', 
+    'Silver', 
+    'Multi'
+];
+
 export let vehicleData = [
     {
         make: 'Dodge',

@@ -2,10 +2,10 @@
 
 form {
     display: flex;
+    background: $drk-grayblue;
     flex-direction: column;
     align-items: center;
     width: 450px;
-    //background-color: $drk-grayblue;
     padding: 20px 0;
     margin: auto;
     p{
@@ -13,6 +13,7 @@ form {
         font-family: $font-3;
         text-align: left;
         width: 80%;
+        margin-bottom: 0;
     }
     input{
         width: 80%;
@@ -33,6 +34,9 @@ form {
         
     }
     .links a:hover{color: $hover-color}
+}
+h2{
+    margin: 10vh 0 5vh 20vw !important;
 }
 
 .fullname{

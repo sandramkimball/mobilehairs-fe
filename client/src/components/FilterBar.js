@@ -1,72 +1,60 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './FilterBar.scss';
+import { colorsList } from '../data/index.js';
 
 function FilterBar (props) {
     const [isSelected, setIsSelected] = useState('')
     const [options, setOptions] = useState({
-        isNew: props.options.isNew || null,
-        make: props.options.make || null,
-        model: props.options.model || null,
+        isNew: props.options.isNew || 'All',
+        make: props.options.make || 'All',
+        model: props.options.model || 'All',
         year: null,
-        body: null,
-        color: null,
-        minPrice: props.options.minPrice || null,
+        body: 'All',
+        color: 'All',
+        minPrice: props.options.minPrice || 0,
         maxPrice: props.options.maxPrice || null,
-        minMiles: null,
+        minMiles: 0,
         maxMiles: null,
         minYear: null,
         maxYear: null
     })
     
-    useEffect(()=> {
-        console.log('FilterBar Options', props.options)
-    }, [props.vehicles])
-
     const handleSelect = e => {
         setOptions({ [e.target.name]: e.target.value})
     }
     
     const handleReset = e => {
         setOptions({
-            isNew: null,
-            make: null,
-            model: null,
+            isNew: '',
+            make: 'All',
+            model: 'All',
             minPrice: 0,
             maxPrice: 10000,
         })
+
     }
     
     const handleColorCheck = e => {
         isSelected==='selected' ? setIsSelected('') : setIsSelected('selected')
     }
 
-    const colorsList = [
-        'All', 
-        'Blue', 
-        'Yellow', 
-        'Red', 
-        'Green', 
-        'Black', 
-        'White', 
-        'Brown', 
-        'Tan', 
-        'Silver', 
-        'Multi'
-    ]
+    const handleSubmit = e => {
+        console.log('how to get the search results to respond!')
+    }
 
     return (
         <section className='filter-bar'>
             {/* Dropdown options */}
             <p>New or Used?</p>
             <select onChange={handleSelect} value={options.isNew}>
-                <option value={null}>All</option>
+                <option value={'All'}>All</option>
                 <option value='true'>New</option>
                 <option value='false'>Used</option>
             </select>
 
             <p>Make</p>
             <select onSelect={handleSelect} value={options.make}>
-                <option name='make' value={null}>All</option>
+                <option name='make' value='All'>All</option>
                 {props.vehicles.map(car=> (
                     <option name='make' value={car.make}>{car.make}</option>
                 ))}
@@ -74,9 +62,8 @@ function FilterBar (props) {
            
             <p>Model</p>
             <select onSelect={handleSelect} value={options.model}> 
-                {options.make == null && (
-                    <option>--</option>
-                )}
+                <option value='All'>All</option>
+                
                 {options.make != null && props.vehicles.map(car => (
                     <option value={car.model}>{car.model}</option>
                 ))}
@@ -152,8 +139,11 @@ function FilterBar (props) {
                 />
             </div>
         
-            <button type='submit'>Submit</button>
-            <button onClick={handleReset}>Reset</button>
+            <div style={{display: 'flex', margin: 'auto'}}>
+                <button type='submit' onSubmit={handleSubmit}>Submit</button>
+                <button onClick={handleReset}>Reset</button>
+            </div>
+            
         </section>
     )
 }

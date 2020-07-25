@@ -58,7 +58,7 @@ const SignIn = props => {
 
                 <div className='links'>
                     <Link to='/registration'>Sign Up</Link>
-                    <Link to='recovery'>Reset Password</Link>
+                    <Link to='/recovery'>Reset Password</Link>
                 </div>
             </form>
             {error !== '' && (
