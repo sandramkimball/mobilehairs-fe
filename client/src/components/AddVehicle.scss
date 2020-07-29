@@ -1,0 +1,19 @@
+@import '../styles/index.scss';
+
+form{
+    display: flex;
+    flex-direction: row;
+    width: 70vw;
+    margin: auto;
+    justify-content: center;
+    align-items: flex-start;
+    div{
+        width: 40%;
+    }
+}
+
+select, input{ @include primary-input}
+
+button{ 
+    margin: 10px auto;
+}

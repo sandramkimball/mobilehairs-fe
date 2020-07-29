@@ -21,16 +21,20 @@ class VehicleDetails extends React.Component {
             color: props.location.state.car.color,
             price: props.location.state.car.price,
             description: props.location.state.car.description,
-            images: props.location.state.car.images
+            image: props.location.state.car.profile_img
         }
         this.handleClick = this.handleClick.bind(this)
     }
+
+    
 
     handleClick=e=> {
         console.log(this.props.location.state.car)
     }
 
-    render(){
+    render(
+        title = `${this.state.year} ${this.state.make} ${this.state.model}`
+    ){
         return (
             <section className='vehicle-details'>
                 <div className='sub-banner'>
@@ -39,14 +43,14 @@ class VehicleDetails extends React.Component {
                 </div>
                 
                 <section className='gallery'>   
-                    <img src={defaultImage} alt={this.state.image}/>  
+                    <img src={this.state.image} alt={this.state.model}/>  
                     <div className='vehicle-info'>            
-                        <h1>{this.state.year}{this.state.make}{this.state.model}</h1>            
+                        <h1>{title}</h1>            
                         <div>    
                             <tb>
                                 <tr>
                                     <th>Price</th>
-                                    <th>{this.state.price}</th>
+                                    <th>${this.state.price}</th>
                                 </tr>
                                 <tr>
                                     <th>Body</th>

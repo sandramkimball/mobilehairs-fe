@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
-import { emailSignInStart, googleSignInStart } from '../../redux/User/user.actions'
+// import { emailSignInStart } from '../../redux/User/user.actions'
 import './Forms.scss'
 import AuthWrapper from '../AuthWrapper'
 
@@ -22,7 +22,8 @@ const SignIn = props => {
         if(email === '' || password === ''){
             setError('Email or password is missing.')
         } else {
-            dispatch( emailSignInStart({ email, password }) )
+            // dispatch( emailSignInStart({ email, password }) )
+            console.log('sign in')
         }
     }
 

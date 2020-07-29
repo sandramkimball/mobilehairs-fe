@@ -1,6 +1,6 @@
 import vehiclesTypes from './vehicles.types'
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
     vehicles: []
 }
 

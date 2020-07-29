@@ -27,12 +27,13 @@ class Nav extends React.Component {
             <nav>
                 <h4>Private Luxury Car Sales</h4>
                 <ul>
-                    <li><Link to='home'>Home</Link></li>
+                    <li><Link to='/'>Home</Link></li>
                     <li onMouseEnter={this.handleHover}><Link to='map'>About</Link></li>
                     <li onMouseEnter={this.handleHover}><Link to='search'>Explore</Link></li>
                     <li><Link to='login'>Login</Link></li>
                     {/* {!user && <li><Link to='login'>Logout</Link></li>} */}
                     <li><Link to='Registration'>Sign Up</Link></li>
+                    <li><Link to='sell'>Sell</Link></li>
                 </ul>
             </nav>
             <div className='sub-list' style={{display: this.state.subDisplay}} onMouseLeave={this.handleMouseLeave}>

@@ -1,11 +1,10 @@
-import { firestore } from './../../firebase/utils'
+import axios from 'axios'
 
 export const handleAddVehicle = vehicle => {
     return new Promise((resolve, reject) => {
-        firestore
-        .collection('vehicles')
-        .doc()
-        .set(vehicle)
+        axios
+        .get(process.env.ROOT_DB)
+        .post(vehicle)
         .then(()=> {
             resolve()
         })
@@ -18,30 +17,21 @@ export const handleAddVehicle = vehicle => {
 
 export const handleFetchVehicles = () => {
     return new Promise((resolve, reject) => {
-        firestore
-        .collection('vehicles')
-        .get()
-        .then(snapshot=> {
-            const vehiclesArray = snapshot.docs.map(doc => {
-                return {
-                    ...doc.data(),
-                    documentID: doc.id
-                }
-            });
-            resolve(vehiclesArray)
+        axios.get(process.env.ROOT_DB)
+        .then(res => {
+            console.log(res)
+            const vehiclesArray = res.data.data
+            return vehiclesArray
         })
         .catch(err => {
             reject(err)
         })
-    })
+    }, [])
 }
 
 export const handleDeleteVehicle = documentID => {
     return new Promise((resolve, reject) => {
-        firestore
-        .collection('vehicles')
-        .doc(documentID)
-        .delete()
+        axios.delete(process.env.ROOT_DB, documentID)
         .then(()=> {
             console.log('Deleted vehicle listing.')
             resolve()
@@ -49,5 +39,5 @@ export const handleDeleteVehicle = documentID => {
         .catch(err => {
             reject(err)
         })
-    })
+    }, [])
 }

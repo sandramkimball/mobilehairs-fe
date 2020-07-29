@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-import { signUpUserStart } from '../../redux/User/user.actions'
+//import { signUpUserStart } from '../../redux/User/user.actions'
 import AuthWrapper from '../AuthWrapper'
 import { Validator } from '../../utils/signupValidator';
 import './Forms.scss'
@@ -33,7 +33,8 @@ const SignUp = props => {
         let isValid = Validator(credentials)
         setCredentials({ errors: isValid })
         if(credentials.errors.length === 0){
-            dispatch( signUpUserStart({ credentials }) )
+            // dispatch( signUpUserStart({ credentials }) )
+            console.log('sign up')
         } else {
             console.log(credentials.errors)
         }

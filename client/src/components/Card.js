@@ -9,7 +9,8 @@ function Card ({car}) {
 
     return (
         <section className='vehicle-card'>            
-                <img src={defaultImage} alt={cardTitle}/>
+                {/* <img src={defaultImage} alt={cardTitle}/> */}
+                <img src={car.profile_img} alt={cardTitle}/>
                 <h4>{cardTitle}</h4>
                 <div className='price'>
                     <div>
