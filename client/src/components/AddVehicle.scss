@@ -1,18 +1,44 @@
 @import '../styles/index.scss';
 
-form{
+.add-form{
     display: flex;
     flex-direction: row;
-    width: 70vw;
+    width: 60vw;
     margin: auto;
-    justify-content: center;
-    align-items: flex-start;
-    div{
+    justify-content: space-evenly;
+    align-items: center;
+    div:nth-child(1){
         width: 40%;
     }
+    div:nth-child(2){
+        width: 50%;
+        border-left: 2px solid $gold;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        input{ width: 65%};
+        p{ width: 25%};
+    }
+    select, input{ @include primary-input; text-align: left}
+    input{ margin: 5px !important; border: 0}
+    p:nth-child(1){
+        margin-top: 0
+    }
+
+    textarea{
+        width: 65%;
+        height: 70px;
+    }
+   
 }
 
-select, input{ @include primary-input}
+.sub-tag{
+    color: $hover-color;
+    font-style: italic;
+    width: 65% !important;
+    margin-left: 25%;
+    font-size: 12px;
+}
 
 button{ 
     margin: 10px auto;

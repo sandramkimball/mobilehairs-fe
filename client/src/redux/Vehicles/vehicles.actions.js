@@ -1,7 +1,7 @@
 import vehiclesTypes from './vehicles.types'
 
 export const addVehicleStart = vehicleData => ({
-    type: vehiclesTypes.ADD_NEW_VEHICLE_START,
+    type: vehiclesTypes.ADD_VEHICLE_START,
     payload: vehicleData
 })
 

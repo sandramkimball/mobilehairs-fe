@@ -3,12 +3,12 @@ import axios from 'axios'
 export const handleAddVehicle = vehicle => {
     return new Promise((resolve, reject) => {
         axios
-        .get(process.env.ROOT_DB)
-        .post(vehicle)
-        .then(()=> {
-            resolve()
+        .post("https://ult-car-sales.herokuapp.com/vehicles", vehicle)
+        .then((res)=> {
+            console.log('Successful Post', res)
         })
         .catch(err=> {
+            console.log('Post failed', err)
             reject(err)
         })
 

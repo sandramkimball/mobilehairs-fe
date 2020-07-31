@@ -3,30 +3,28 @@ import { setVehicles, fetchVehiclesStart } from './vehicles.actions'
 import { handleAddVehicle, handleFetchVehicles, handleDeleteVehicle } from './vehicles.helpers'
 import vehiclesTypes from './vehicles.types'
 
-let vehiclePayload = [ 
-    'make',
-    'model',
-    'drive',
-    'price',
-    'miles',
-    'year',
-    'body',
-    'color',
-    'transmission',
-    'engine',
-    'vin', 
-    'description',
-    'fuel'
-]
+// let vehiclePayload = [ 
+//     'make',
+//     'model',
+//     'drive',
+//     'price',
+//     'miles',
+//     'year',
+//     'body',
+//     'color',
+//     'profile_img',
+//     'tags',
+//     'features',
+//     'transmission',
+//     'engine',
+//     'vin', 
+//     'description',
+//     'fuel'
+// ]
 
-export function* addVehicle({ payload: vehiclePayload }) {
+export function* addVehicle({ payload: vehicle }) {
     try {
-        const timestamp = new Date()
-        yield handleAddVehicle({
-            vehiclePayload,
-            //vehicleAdminUserUID: auth.currentUser.uid,
-            createdDate: timestamp
-        });
+        yield handleAddVehicle(vehicle);
         yield put(
             fetchVehiclesStart()
         )
@@ -36,8 +34,8 @@ export function* addVehicle({ payload: vehiclePayload }) {
     }
 }
 
-export function* onAddVehicleStart(){
-    yield takeLatest(vehiclesTypes.ADD_NEW_VEHICLE_START, addVehicle)
+export function* onAddVehicleStart(vehicle){
+    yield takeLatest(vehiclesTypes.ADD_VEHICLE_START, addVehicle(vehicle))
 }
 
 export function* fetchVehicles(){

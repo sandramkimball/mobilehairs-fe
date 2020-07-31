@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'
-import { typeInOpt, dropdownOpt, colorsList } from '../data'
+import { typeInOpt, colorsList } from '../data'
+import axios from 'axios'
 import './AddVehicle.scss'
 
 // Context & Reducers
@@ -10,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 function AddVehicle () {    
     const dispatch = useDispatch();
     const history = useHistory()
-    const [error, setError] = useState(false)
+    const [tempFeat, setTempFeat] = useState('')
     const [data, setData] = useState({
         make: '',
         model: '',
@@ -31,34 +32,48 @@ function AddVehicle () {
     const handleSelect = e => {
         setData({...data, [e.target.name]: e.target.value})
     }
-    const handleAddFeature = (e, value) => {
+    const handleAddFeature = e => {
         e.preventDefault()
-        data.features.push(value)
+        setTempFeat(e.target.value)
     }
+
     const handleSubmit = e => {
         e.preventDefault()
-        if(error === false){
-            console.log('Whoo')
-            dispatch( addVehicleStart(data) )
-            history.push('/search')
-        } else {
-            
-        }
+        // First, break up tempFeat string into each feature and add to features array.
+        let temp = tempFeat.split('. ')
+        temp.forEach(feature=> (
+           data.features.push(feature)
+        )) 
+
+        console.log('data', data)
+        //Second, post data.
+        // dispatch( addVehicleStart(data) )
+        axios.post("https://ult-car-sales.herokuapp.com/vehicles", data)
+        .then((res)=> {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+        history.push('/search')
     }
 
 
     return (
         <section>
-            <form onSubmit={handleSubmit}>     
+            <h2>Add Vehicle</h2>
+            <form onSubmit={handleSubmit} className='add-form'>     
                 <div>
                     <p>New or Used?</p>
                     <select onChange={handleSelect} name={'isNew'}>
+                        <option value=''>--</option>
                         <option value='true'>New</option>
                         <option value='false'>Used</option>
                     </select>
                                 
                     <p>Engine</p>
                     <select onChange={handleSelect} name={'engine'}>
+                        <option value=''>--</option>
                         <option value='4 Cyl'>4 Cyl</option>
                         <option value='6 Cyl'>6 Cyl</option>
                         <option value='8 Cyl'>8 Cyl</option>
@@ -68,21 +83,34 @@ function AddVehicle () {
 
                     <p>Body</p>
                     <select onChange={handleSelect} name={'body'}>
+                        <option value=''>--</option>
                         <option value='pickup'>Pickup</option>
                         <option value='sedan'>Sedan</option>
                         <option value='coupe'>Coupe</option>
                         <option value='hatchback'>Hatchback</option>
-                        <option value='SUV'>SUV</option>
+                        <option value='suv'>SUV</option>
+                        <option value='other'>Other</option>
                     </select>
 
                     <p>Transmission</p>
                     <select onChange={handleSelect} name={'transmission'}>
+                        <option value=''>--</option>
                         <option value='pickup'>Manual</option>
                         <option value='sedan'>Automatic</option>
                     </select>
 
+                    <p>Drive</p>
+                    <select onChange={handleSelect} name={'drive'}>
+                        <option value=''>--</option>
+                        <option value='AWD'>AWD</option>
+                        <option value='FWD'>FWD</option>
+                        <option value='RWD'>RWD</option>
+                        <option value='4WD'>4WD</option>
+                    </select>
+
                     <p>Fuel</p>
                     <select onChange={handleSelect} name={'fuel'}>
+                        <option value=''>--</option>
                         <option value='gasoline'>Gasoline</option>
                         <option value='electric'>Electric</option>
                         <option value='diesel'>Diesel</option>
@@ -98,15 +126,22 @@ function AddVehicle () {
                 <div>
                     {typeInOpt.map(option=> (
                         <>
-                        <p>{option}</p>
+                        <p>{option.slice(0,1).toUpperCase()}{option.slice(1)}</p>
                         <input 
-                            type='text'
                             name={option}
                             value={data.option}
                             onChange={handleSelect}                       
                         />
                         </>
                     ))}
+                    <p>Features</p>
+                     <textarea
+                        type='text'
+                        name={tempFeat}
+                        value={tempFeat}
+                        onChange={handleAddFeature}
+                    />
+                    <p className='sub-tag'>*Please separate feautres with a period.</p>
                 </div>
             </form>
             <button onClick={handleSubmit}>Submit</button>

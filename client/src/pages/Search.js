@@ -87,7 +87,7 @@ const Search = props => {
 
                     {/* Display results. */}
                     {state.resultsError === false && vehicles && vehicles.map(car=> (
-                        <Card car={car}/>
+                        <Card key={car._id} car={car}/>
                     ))}
 
                 </div>
