@@ -24,10 +24,10 @@ function RangeSlider(props){
             <input type="range" min={0} max={max} value={10000} className="slider" name='inputRight' onChange={e=>handleRight(e,max)}/>
 
             <div class="slider">
-                <div class="track"></div>
-                <div class="range"></div>
-                <div class="thumb left" style={{left: min+leftValue}}></div>
-                <div class="thumb right" style={{right: max-rightValue}}></div>
+                <div className="track"></div>
+                <div className="range"></div>
+                <div className="thumb left" style={{left: min+leftValue}}></div>
+                <div className="thumb right" style={{right: max-rightValue}}></div>
             </div>
         </div>
     )

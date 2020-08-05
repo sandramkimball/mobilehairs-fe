@@ -1,35 +1,44 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import defaultImage from '../assets/car-3.jpg'
 import './Card.scss'
+
+// Redux
+import { deleteVehicleStart } from '../redux/Vehicles/vehicles.actions'
+import { useDispatch, useSelector } from 'react-redux'
 
 function Card ({car}) {    
     let cardTitle = `${car.year} ${car.make} ${car.model}`
     let monthlyCost = Math.round(car.price/36)
+    let dispatch = useDispatch()
+
+    const handleDelete = e => {
+        e.preventDefault()
+        dispatch( deleteVehicleStart(car._id) )   
+        console.log(`Deleting car #${car._id}`)     
+    }
 
     return (
         <section className='vehicle-card'>            
-                {/* <img src={defaultImage} alt={cardTitle}/> */}
-                <img src={car.profile_img} alt={cardTitle}/>
-                <h4>{cardTitle}</h4>
-                <div className='price'>
-                    <div>
-                        <h4>${car.price}</h4>
-                        <p>Total</p>
-                    </div>
-                    <div>
-                        <h4>${monthlyCost}</h4>
-                        <p>/month</p>
-                    </div>
-                    <div>
-                        <h4>36</h4>
-                        <p>Months</p>
-                    </div>
+            <button className='delete-btn' onClick={handleDelete}>X</button>
+            <img src={car.profile_img} alt={cardTitle}/>
+            <h4>{cardTitle}</h4>
+            <div className='price'>
+                <div>
+                    <h4>${car.price}</h4>
+                    <p>Total</p>
                 </div>
-                <p>{car.description}</p>
-                <Link to={{pathname: '/vehicle', state:{car} }}>
-                    <button> View Details </button>
-                </Link>
+                <div>
+                    <h4>${monthlyCost}</h4>
+                    <p>/month</p>
+                </div>
+                <div>
+                    <h4>36</h4>
+                    <p>Months</p>
+                </div>
+            </div>
+            <Link to={{pathname: '/vehicle', state:{car} }}>
+                <button> View Details </button>
+            </Link>
         </section>
     )
 }

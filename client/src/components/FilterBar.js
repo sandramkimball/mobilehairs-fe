@@ -8,15 +8,15 @@ function FilterBar (props) {
         isNew: props.options.isNew || 'All',
         make: props.options.make || 'All',
         model: props.options.model || 'All',
-        year: null,
+        year: '',
         body: 'All',
         color: 'All',
         minPrice: props.options.minPrice || 0,
-        maxPrice: props.options.maxPrice || null,
+        maxPrice: props.options.maxPrice || '',
         minMiles: 0,
-        maxMiles: null,
-        minYear: null,
-        maxYear: null
+        maxMiles: '',
+        minYear: '',
+        maxYear: ''
     })
     
     const handleSelect = e => {
@@ -53,19 +53,19 @@ function FilterBar (props) {
             </select>
 
             <p>Make</p>
-            <select onSelect={handleSelect} value={options.make}>
+            <select onChange={handleSelect} value={options.make}>
                 <option name='make' value='All'>All</option>
-                {props.vehicles.map(car=> (
-                    <option name='make' value={car.make}>{car.make}</option>
+                {props.vehicles.map((car, index)=> (
+                    <option key={index} name='make' value={car.make}>{car.make}</option>
                 ))}
             </select> 
            
             <p>Model</p>
-            <select onSelect={handleSelect} value={options.model}> 
+            <select onChange={handleSelect} value={options.model}> 
                 <option value='All'>All</option>
                 
-                {options.make != null && props.vehicles.map(car => (
-                    <option value={car.model}>{car.model}</option>
+                {options.make != null && props.vehicles.map((car, index) => (
+                    <option key={index} value={car.model}>{car.model}</option>
                 ))}
             </select>
 
@@ -95,6 +95,7 @@ function FilterBar (props) {
                     name='minPrice'
                     value={options.minPrice}
                     placeholder='0'
+                    onChange={handleSelect}
                 />
                 <p>to</p>
                 <input 
@@ -102,6 +103,7 @@ function FilterBar (props) {
                     name='maxPrice'
                     value={options.maxPrice}
                     placeholder='0'
+                    onChange={handleSelect}
                 />
             </div>
 
@@ -112,6 +114,7 @@ function FilterBar (props) {
                     name='minMiles'
                     value={options.minMiles}
                     placeholder='0'
+                    onChange={handleSelect}
                 />
                 <p>to</p>
                 <input 
@@ -119,6 +122,7 @@ function FilterBar (props) {
                     name='maxMiles'
                     value={options.maxMiles}
                     placeholder='0'
+                    onChange={handleSelect}
                 />
             </div>
 
@@ -129,6 +133,7 @@ function FilterBar (props) {
                     name='minYear'
                     value={options.minYear}
                     placeholder='0'
+                    onChange={handleSelect}
                 />
                 <p>to</p>
                 <input 
@@ -136,6 +141,7 @@ function FilterBar (props) {
                     name='maxYear'
                     value={options.maxYear}
                     placeholder='0'
+                    onChange={handleSelect}
                 />
             </div>
         

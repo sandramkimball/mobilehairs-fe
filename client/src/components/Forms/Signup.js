@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
-//import { signUpUserStart } from '../../redux/User/user.actions'
-import AuthWrapper from '../AuthWrapper'
 import { Validator } from '../../utils/signupValidator';
+import AuthWrapper from '../AuthWrapper'
 import './Forms.scss'
+import axios from 'axios'
 
-const mapState = ({ user }) => ({
-    currentUser: user.currentUser
+// Redux
+import { addUserStart } from '../../redux/User/user.actions'
+import { useDispatch, useSelector } from 'react-redux'
+
+const mapState = ({ userData }) => ({
+    currentUser: userData.currentUser
 });
 
-const SignUp = props => {
+const SignUp = () => {
     const dispatch = useDispatch()
     const history = useHistory()
+    let URL = "https://ult-car-sales.herokuapp.com/auth"
     const { currentUser, userErr } = useSelector(mapState)
-
-    // Set State
     const [ credentials, setCredentials ] = useState({
         firstName: '',
         lastName: '',
@@ -28,22 +30,43 @@ const SignUp = props => {
         errors: []
     })
 
-    const handleSubmit = e => {
-        e.preventDefault()
-        let isValid = Validator(credentials)
-        setCredentials({ errors: isValid })
-        if(credentials.errors.length === 0){
-            // dispatch( signUpUserStart({ credentials }) )
-            console.log('sign up')
-        } else {
-            console.log(credentials.errors)
-        }
-    }
-
     const handleChange = e => {
-        e.preventDefault()
         setCredentials({...credentials, [e.target.name]: e.target.value})
     }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        let userCredentials = {
+            firstName: credentials.firstName,
+            lastName: credentials.lastName,
+            email: credentials.email,
+            password: credentials.password,
+            city: credentials.city,
+            state: credentials.state,
+            isAdmin: false
+        }
+
+        //  Check if signup form is complete:
+        // let isValid = Validator(credentials)
+        // setCredentials({ errors: isValid })
+
+        // If form is valid, post new user, else, return errors.
+        // if(credentials.errors.length === 0){
+        //     console.log('Dispatch initiate:')
+        //     dispatch( addUserStart(userCredentials) )
+        // } else {
+        //     console.log(credentials.errors)
+        // }
+
+        axios.post(`${URL}/register`, credentials)
+        .then(res => {
+            console.log(res)
+        })
+        .catch(err => {
+            console.log('failed to signup user', err)
+        })
+    }
+
 
     useEffect(()=> {
         if(currentUser){
@@ -124,10 +147,10 @@ const SignUp = props => {
                     placeholder='Confirm Password'
                     onChange={handleChange}
                 />
-                <button type='submit'>Submit</button>
                 <div className='links'>
-                    <Link to='/login'>Sign In</Link>
+                    <Link to='/login'>Already Have An Account?</Link>
                 </div>
+                <button type='submit'>Submit</button>
             </form>
                 {credentials.errors && (
                     <ul className='form-errors'>

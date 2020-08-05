@@ -19,16 +19,14 @@ const PaymentCalculator = (props) => {
             <div>
                 <p>Price</p>
                 <input 
-                    label = 'Purchase Price'
-                    name='purchasePrice'
-                    placeholder={`$${price}`}
+                    value={`$${price}`}
                 />
                 
                 <p>Down Payment</p>
                 <input 
                     label='Down Payment'
                     name='downpay'
-                    value={downpay}
+                    value={`$${downpay}`}
                     placeholder={`$${downpay}`}
                     onChange={e=>setDownpay(e.target.value)}
                 />

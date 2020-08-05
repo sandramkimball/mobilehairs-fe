@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.scss'
 
 // State Management Context Providers
+import UserProvider from './redux/User/user.context'
 import DataProvider from './redux/Vehicles/vehicles.context'
 
 // Components
@@ -23,6 +24,7 @@ import AddVehicle from './components/AddVehicle';
 function App() {
     return (
         <div className='App'>
+            <UserProvider>
             <DataProvider>
             <Router>
                 <Nav/>
@@ -39,6 +41,7 @@ function App() {
                 <Footer/>
             </Router>
             </DataProvider>
+            </UserProvider>
         </div>
     )
 }

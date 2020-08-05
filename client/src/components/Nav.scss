@@ -59,11 +59,11 @@ nav{
 footer{
     width: 100%;
     height: 10vh;
-    background-color: #fff;
+    background-color: $drk-grayblue;
     flex-direction: center;
-    margin-top: 50%;
     font-family: $font-3;
     text-align: left;
+    color: $hover-color;
     ul{
         margin: auto;
         li {
@@ -74,7 +74,7 @@ footer{
             }
         }
         li:hover{
-            color: $hover-color;
+            color: #dcdcdd;
             cursor: pointer; 
         }
     }

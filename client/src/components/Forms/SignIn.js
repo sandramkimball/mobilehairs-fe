@@ -1,36 +1,46 @@
 import React, { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
-// import { emailSignInStart } from '../../redux/User/user.actions'
 import './Forms.scss'
 import AuthWrapper from '../AuthWrapper'
 
-const mapState = ({ user }) => ({
-    currentUser: user.currentUser
+// Redux
+import { emailSignInStart } from '../../redux/User/user.actions'
+import { useDispatch, useSelector } from 'react-redux'
+
+const mapState = ({ userData }) => ({
+    currentUser: userData.currentUser
 });
 
-const SignIn = props => {
+const SignIn = () => {
     const dispatch = useDispatch()
     const history = useHistory()
-    const { currentUser } = useSelector(mapState)
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
+    const { currentUser } = useSelector( mapState )
+    const [ error, setError ] = useState('')
+    const [ credentials, setCredentials ] = useState({
+        password: '',
+        email: ''
+    })
+
+    const handleChange = e => {
+        setCredentials({ ...credentials, [e.target.name]: e.target.value})
+    }
 
     const handleSubmit = e => {
         e.preventDefault()
-        if(email === '' || password === ''){
-            setError('Email or password is missing.')
-        } else {
-            // dispatch( emailSignInStart({ email, password }) )
-            console.log('sign in')
+        if(credentials.email === ''){ setError('Email is missing.') }        
+        if(credentials.password === ''){ setError('Password is missing.') }        
+        else {
+            dispatch( emailSignInStart( credentials.email, credentials.password ) )
         }
     }
 
     useEffect(()=> {
         if(currentUser){
-            setPassword('')
-            setEmail('')
+            setCredentials({
+                email: currentUser.email,
+                password: ''
+            })
+            console.log('Already logged in.')
             history.push('/')
         }
     }, [currentUser])
@@ -42,25 +52,25 @@ const SignIn = props => {
                 <input 
                     type='email'
                     name='email'
-                    value={email}
+                    value={credentials.email}
                     placeholder='Email'
-                    handleChange={e=> setEmail(e.target.value)}
+                    onChange={handleChange}
                 />
                 <p>Password</p>
                 <input 
                     type='password'
                     name='password'
-                    value={password}
+                    value={credentials.password}
                     placeholder='Password'
-                    handleChange={e=> setPassword(e.target.value)}
+                    onChange={handleChange}
 
                 />
-                <button type='submit'>Login</button>
-
                 <div className='links'>
                     <Link to='/registration'>Sign Up</Link>
-                    <Link to='/recovery'>Reset Password</Link>
+                    <Link to='/recovery'>Forgot Your Password?</Link>
                 </div>
+
+                <button type='submit'>Login</button>
             </form>
             {error !== '' && (
                 <ul className='form-errors'>

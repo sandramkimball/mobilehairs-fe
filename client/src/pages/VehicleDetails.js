@@ -21,7 +21,8 @@ class VehicleDetails extends React.Component {
             color: props.location.state.car.color,
             price: props.location.state.car.price,
             description: props.location.state.car.description,
-            image: props.location.state.car.profile_img
+            image: props.location.state.car.profile_img,
+            features: props.location.state.car.features
         }
         this.handleClick = this.handleClick.bind(this)
     }
@@ -38,8 +39,7 @@ class VehicleDetails extends React.Component {
         return (
             <section className='vehicle-details'>
                 <div className='sub-banner'>
-                    <h3><Link to='/search'> <FontAwesomeIcon icon={faChevronLeft}/>Back to Results</Link></h3>
-                   
+                    <h3><Link to='/search'> <FontAwesomeIcon icon={faChevronLeft}/>Back to Results</Link></h3> 
                 </div>
                 
                 <section className='gallery'>   
@@ -86,9 +86,9 @@ class VehicleDetails extends React.Component {
                 <section className='features'>   
                     <h4>Features</h4>
                     <ul>
-                        <li>Interior</li>
-                        <li>Wireless phone connectivity</li>
-                        <li>A/C</li>
+                        {this.state.features.map(feature=> (
+                            <li>{feature}</li>
+                        ))}
                     </ul>                    
                 </section>
             

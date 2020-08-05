@@ -37,30 +37,6 @@
     }
 }
 
-.sort-by{
-    position: absolute;
-    right: 10px;
-    border-bottom: 1px solid $hover-color2;
-    display: flex;
-    height: 40px;
-    p{ 
-        color: #000;
-        padding: 1px 4px 0px;
-        margin: auto;
-        font-family: $font-3;  
-    }
-    select{
-        background: none;
-        border: none; 
-        font-family: $font-3;  
-        font-size: 16px;     
-        padding-bottom: 0;
-    }
-    .select-items{ 
-        background: none;
-    }
-}
-
 .gallery .vehicle-info{
     display: flex;
     flex-direction: column;
@@ -77,12 +53,18 @@
     th:nth-child(2){
         width: 45%;
     }
+
     //table div and buttons div
     div{
         display: flex;
         justify-content: flex-start;
-        button{ @include button-3; margin-right: 10px;}
-        button:hover{ @include button-hover-2}
+        button{ 
+            @include button-3; 
+            margin-right: 10px;
+        }
+        button:hover{ 
+            @include button-hover-2
+        }
     }
 }
 
@@ -93,29 +75,35 @@
     border: 1px solid $hover-color;
     display: flex;
     justify-content: space-between;
+    text-align: center;
     h2{
+        text-align: center;
         font-size: 24px;
+        margin: 20px auto !important;
+        padding: 0 !important;
     }
-    div{ 
-        border: none; 
-        width: 45%;
-        margin: auto;
+    p{
+        margin-bottom: 0;
     }
     input{ 
         @include primary-input;
-        width: 50%;    
+        width: 60%;    
         margin: 10px auto;    
     }
     select{ 
         @include primary-select;   
-        width: 50%;   
+        width: 60%;   
         margin: 10px auto;         
+    }
+    div{ 
+        border: none; 
+        width: 50%;
+        margin: auto;
     }
     .monthly-payment{
         margin: auto;
         text-align: center;
-        margin: center;
-        font-size: 24px;
+        font-size: 34px;
         padding: 10% 0; 
     }
 }
@@ -128,7 +116,7 @@
     h4{ 
         font-size: 24px;
         font-weight: 600;
-        margin-bottom: 20px
+        margin-top: 40px
     }
     li{
         padding: 10px 0;

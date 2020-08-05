@@ -17,7 +17,7 @@ const mapState = ({ vehiclesData }) => ({
 const Search = props => {
     const dispatch = useDispatch();
     const { vehicles } = useSelector( mapState )
-    const [state, setState] = useState({
+    const [ state, setState ] = useState({
         sortBy: 'Newest',
         resultsError: false,
         options: {
@@ -67,8 +67,6 @@ const Search = props => {
             <div className='search-container'>
                 <FilterBar vehicles={vehicles} options={state.options}/>
                 <div className='results-container'>
-
-                    {/* Options to sort car results by. */}
                     <div className='sort-by'>
                         <p>Sort By: </p>
                         <select onChange={handleSelect} value={props.sortBy}>
@@ -79,17 +77,15 @@ const Search = props => {
                             <option value={'Price (Desc)'}>Price (Descending)</option>
                         </select>
                     </div>
-                    
-                    {/* Error if there's no matching results. */}
-                    {state.resultsError === true || !vehicles && (
-                        <h4 className='search-error'> Your search results returned nothing.</h4>
-                    )}
+                    <div className='card-container'>
+                        {state.resultsError === true || !vehicles && (
+                            <h4 className='search-error'> Your search results returned nothing.</h4>
+                        )}
 
-                    {/* Display results. */}
-                    {state.resultsError === false && vehicles && vehicles.map(car=> (
-                        <Card key={car._id} car={car}/>
-                    ))}
-
+                        {state.resultsError === false && vehicles && vehicles.map(car=> (
+                            <Card key={car._id} car={car}/>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

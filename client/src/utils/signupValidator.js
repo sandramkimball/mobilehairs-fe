@@ -7,7 +7,7 @@ export const Validator = (credentials) => {
     if(credentials.lastName.length < 2){
         errors.push('Please enter a last name') 
     }
-    if(credentials.email.length < 7 || !credentials.email.length.contains('\@\g')){
+    if(credentials.email.length < 7 || !credentials.email.includes('\@\g')){
         errors.push('Please enter an email') 
     }
     if(credentials.city === ''){

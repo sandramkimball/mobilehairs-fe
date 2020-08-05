@@ -31,12 +31,13 @@ export const handleFetchVehicles = () => {
 
 export const handleDeleteVehicle = documentID => {
     return new Promise((resolve, reject) => {
-        axios.delete(process.env.ROOT_DB, documentID)
-        .then(()=> {
-            console.log('Deleted vehicle listing.')
+        axios.delete(`https://ult-car-sales.herokuapp.com/vehicles/${documentID}`)
+        .then( res => {
+            console.log('Car has been vanquished.', res)
             resolve()
         })
         .catch(err => {
+            console.log('The damn car is still here.', err)
             reject(err)
         })
     }, [])
