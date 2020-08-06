@@ -3,6 +3,7 @@
 .vehicle-details{
     text-align: left;
     font-family: $font-3;
+    min-height: 0 !important;
     .sub-banner{
         @include banner-primary;
         a{
@@ -26,6 +27,7 @@
 
 .gallery{
     display: flex;
+    min-height: 0 !important;
     width: 80%;
     height: 25vw;
     margin: 20px auto;
@@ -39,6 +41,7 @@
 
 .gallery .vehicle-info{
     display: flex;
+    min-height: 0 !important;
     flex-direction: column;
     justify-content: space-evenly;
     width: 80%;
@@ -75,6 +78,7 @@
     border: 1px solid $hover-color;
     display: flex;
     justify-content: space-between;
+    min-height: 0 !important;
     text-align: center;
     h2{
         text-align: center;

@@ -5,13 +5,18 @@ export const setCurrentUser = user => ({
     payload: user
 })
 
+export const setToken = token => ({
+    type: userTypes.SET_TOKEN,
+    payload: token
+})
+
 export const addUserStart = userCredentials => ({
     type: userTypes.ADD_USER_START,
     payload: userCredentials
 })
 
-export const emailSignInStart = userCredentials => ({
-    type: userTypes.EMAIL_SIGN_IN_START,
+export const signInStart = userCredentials => ({
+    type: userTypes.SIGN_IN_START,
     payload: userCredentials
 })
 

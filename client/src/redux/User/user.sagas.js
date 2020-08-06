@@ -1,7 +1,7 @@
 import userTypes from './user.types'
 import { takeLatest, call, put } from 'redux-saga/effects';
-import { setCurrentUser, signOutUserSuccess, signOutUserStart, resetPasswordSuccess, userError, emailSignInStart } from './user.actions'
-import { handleResetPassword, handleAddUser, handleEmailSignIn } from './user.helpers'
+import { setCurrentUser, setToken, signOutUserSuccess, signOutUserStart, resetPasswordSuccess, userError, signInStart } from './user.actions'
+import { handleResetPassword, handleAddUser, handleSignIn } from './user.helpers'
 
 // SIGN UP
 export function* addUser( user ){
@@ -20,23 +20,21 @@ export function* onAddUserStart(){
 }
 
 // SIGN IN
-export function* emailSignIn ( email, password ){
-    console.log('emailSignIn Saga initiated')
+export function* signIn ({ payload: { email, password } }){
+    console.log('signIn Saga initiated')
     try{
-        yield emailSignInStart();
-        // const user = yield handleEmailSignIn( email, password )
-        const user = {
-            firstName: 'Bob'
-        }
-        
-        yield setCurrentUser( user )
+        const userData = yield handleSignIn( email, password )
+
+        yield setCurrentUser( userData.user )
+        yield setToken( userData.token )
     } 
     catch (err){ 
+        console.log('Reducer Saga Failure')
         yield put( userError (err) )
     }
 }
-export function* onEmailSignInStart( email, password ) {
-    yield takeLatest(userTypes.EMAIL_SIGN_IN_START, emailSignIn(email, password))
+export function* onSignInStart() {
+    yield takeLatest(userTypes.SIGN_IN_START, signIn)
 }
 
 // SIGN OUT
@@ -71,7 +69,7 @@ export function* onResetPasswordStart(){
 
 export default function* userSagas(){
     yield afterAll([
-        call(onEmailSignInStart),
+        call(onSignInStart),
         call(onSignOutUserStart),
         call(onAddUserStart),
         call(onResetPasswordStart),

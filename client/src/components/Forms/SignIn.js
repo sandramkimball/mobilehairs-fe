@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import axios from 'axios'
 import './Forms.scss'
+import axios from 'axios'
 import AuthWrapper from '../AuthWrapper'
 
 // Redux
-import { emailSignInStart, setCurrentUser } from '../../redux/User/user.actions'
+import { signInStart, setCurrentUser, setToken } from '../../redux/User/user.actions'
 import { useDispatch, useSelector } from 'react-redux'
 
 
 const mapState = ({ userData }) => ({
     currentUser: userData.currentUser,
+    token: userData.token
 });
 
 const SignIn = () => {
     const dispatch = useDispatch()
     const history = useHistory()
-    const { currentUser } = useSelector( mapState )
     let URL = "https://ult-car-sales.herokuapp.com/auth"
+    const { currentUser, token } = useSelector( mapState )
     const [ error, setError ] = useState('')
     const [ credentials, setCredentials ] = useState({
         password: '',
@@ -32,23 +33,23 @@ const SignIn = () => {
         e.preventDefault()
         if(credentials.email === '' || credentials.password === ''){ 
             setError('Email or password is missing.') 
-        }        
-        else {
-            // dispatch( emailSignInStart( credentials.email, credentials.password ) )
-            axios.post(`${URL}/login`, credentials)
+        } else {
+            // dispatch( signInStart( credentials.email, credentials.password ) )
+
+            axios.post(`${URL}/login`, credentials )
             .then(res => {
-                console.log(res.data)
-                setCurrentUser( res.data.user )
+                let userData = res.data.data
+                dispatch( setCurrentUser(userData.user), setToken(userData.token))
                 history.push('/search')
             })
             .catch(err => {
-                console.log('failed to signin user', err)
+                console.log('Failed to signin user.', err)
             })
         }
     }
 
     useEffect(()=> {
-        if(currentUser){
+        if(token){
             setCredentials({
                 email: currentUser.email,
                 password: ''

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Vehicle.scss';
-import defaultImage from '../assets/car-1.jpg'
 import PaymentCalculator from '../components/Calculator'
 //Icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
