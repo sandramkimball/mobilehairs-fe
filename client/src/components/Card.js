@@ -21,24 +21,26 @@ function Card ({car}) {
         <section className='vehicle-card'>            
             <button className='delete-btn' onClick={handleDelete}>X</button>
             <img src={car.profile_img} alt={cardTitle}/>
-            <h4>{cardTitle}</h4>
-            <div className='price'>
-                <div>
-                    <h4>${car.price}</h4>
-                    <p>Total</p>
+            <div className='card-info'>
+                <h3>{cardTitle}</h3>
+                <div className='price'>
+                    <div>
+                        <h4>${car.price}</h4>
+                        <p>Total</p>
+                    </div>
+                    <div>
+                        <h4>${monthlyCost}</h4>
+                        <p>/month</p>
+                    </div>
+                    <div>
+                        <h4>36</h4>
+                        <p>Months</p>
+                    </div>
                 </div>
-                <div>
-                    <h4>${monthlyCost}</h4>
-                    <p>/month</p>
-                </div>
-                <div>
-                    <h4>36</h4>
-                    <p>Months</p>
-                </div>
+                <Link to={{pathname: '/vehicle', state:{car} }}>
+                    <button> View Details </button>
+                </Link>
             </div>
-            <Link to={{pathname: '/vehicle', state:{car} }}>
-                <button> View Details </button>
-            </Link>
         </section>
     )
 }

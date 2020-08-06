@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useHistory } from 'react-router-dom'
+import axios from 'axios'
 import './Forms.scss'
 import AuthWrapper from '../AuthWrapper'
 
 // Redux
-import { emailSignInStart } from '../../redux/User/user.actions'
+import { emailSignInStart, setCurrentUser } from '../../redux/User/user.actions'
 import { useDispatch, useSelector } from 'react-redux'
 
+
 const mapState = ({ userData }) => ({
-    currentUser: userData.currentUser
+    currentUser: userData.currentUser,
 });
 
 const SignIn = () => {
     const dispatch = useDispatch()
     const history = useHistory()
     const { currentUser } = useSelector( mapState )
+    let URL = "https://ult-car-sales.herokuapp.com/auth"
     const [ error, setError ] = useState('')
     const [ credentials, setCredentials ] = useState({
         password: '',
@@ -27,10 +30,20 @@ const SignIn = () => {
 
     const handleSubmit = e => {
         e.preventDefault()
-        if(credentials.email === ''){ setError('Email is missing.') }        
-        if(credentials.password === ''){ setError('Password is missing.') }        
+        if(credentials.email === '' || credentials.password === ''){ 
+            setError('Email or password is missing.') 
+        }        
         else {
-            dispatch( emailSignInStart( credentials.email, credentials.password ) )
+            // dispatch( emailSignInStart( credentials.email, credentials.password ) )
+            axios.post(`${URL}/login`, credentials)
+            .then(res => {
+                console.log(res.data)
+                setCurrentUser( res.data.user )
+                history.push('/search')
+            })
+            .catch(err => {
+                console.log('failed to signin user', err)
+            })
         }
     }
 

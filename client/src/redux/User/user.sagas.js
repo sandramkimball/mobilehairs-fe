@@ -23,15 +23,19 @@ export function* onAddUserStart(){
 export function* emailSignIn ( email, password ){
     console.log('emailSignIn Saga initiated')
     try{
-        const user = yield emailSignInStart();
-        yield handleEmailSignIn( email, password, setCurrentUser( user ))
+        yield emailSignInStart();
+        // const user = yield handleEmailSignIn( email, password )
+        const user = {
+            firstName: 'Bob'
+        }
+        
+        yield setCurrentUser( user )
     } 
     catch (err){ 
         yield put( userError (err) )
     }
 }
 export function* onEmailSignInStart( email, password ) {
-    console.log('onEmailSignInStart initiated')
     yield takeLatest(userTypes.EMAIL_SIGN_IN_START, emailSignIn(email, password))
 }
 

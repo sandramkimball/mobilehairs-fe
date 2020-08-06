@@ -2,6 +2,7 @@ import userTypes from './user.types'
 
 export const INITIAL_STATE = {
     currentUser: null,
+    token: null,
     registrationSuccess: false,
     resetPasswordSuccess: false,
     userErr: []

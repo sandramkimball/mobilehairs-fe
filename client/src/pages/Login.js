@@ -4,7 +4,11 @@ import './LoginReg.scss';
 
 class Login extends React.Component {
   render(){
-    return <SignIn />
+    return (
+      <section>
+        <SignIn />
+      </section>
+    )
   }
 }
 
