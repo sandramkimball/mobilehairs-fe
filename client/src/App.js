@@ -19,6 +19,7 @@ import VehicleDetails from './pages/VehicleDetails';
 import Login from './pages/Login';
 import Registration from './pages/Registration';
 import AddVehicle from './components/AddVehicle';
+import MyAccount from './pages/MyAccount';
 
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
                     <Route path='/login' component={Login}/>
                     <Route path='/registration' component={Registration}/>
                     <Route path='/sell' component={AddVehicle}/>
+                    <Route path='/account' component={MyAccount}/>
                 </Switch>
                 <Footer/>
             </Router>

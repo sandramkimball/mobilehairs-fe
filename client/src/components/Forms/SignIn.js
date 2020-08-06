@@ -40,7 +40,12 @@ const SignIn = () => {
             .then(res => {
                 let userData = res.data.data
                 dispatch( setCurrentUser(userData.user), setToken(userData.token))
-                history.push('/search')
+                localStorage.setItem('token', userData.token)
+                localStorage.setItem('userData', JSON.stringify(userData.user))
+                history.push({
+                    pathname: '/account',
+                    search: `?user=${userData.user._id}`
+                })
             })
             .catch(err => {
                 console.log('Failed to signin user.', err)

@@ -8,7 +8,7 @@ import './AddVehicle.scss'
 import { addVehicleStart } from '../redux/Vehicles/vehicles.actions'
 import { useDispatch, useSelector } from 'react-redux';
 
-function AddVehicle () {    
+function AddVehicle (props) {    
     const dispatch = useDispatch();
     const history = useHistory()
     const [tempFeat, setTempFeat] = useState('')
@@ -27,6 +27,7 @@ function AddVehicle () {
         features: [],
         images: [],
         tags: [],
+        // user_id: props.currentUser._id
     })
 
     const handleSelect = e => {
@@ -36,6 +37,7 @@ function AddVehicle () {
         e.preventDefault()
         setTempFeat(e.target.value)
     }
+    console.log('props', props.location.state)
 
     const handleSubmit = e => {
         e.preventDefault()

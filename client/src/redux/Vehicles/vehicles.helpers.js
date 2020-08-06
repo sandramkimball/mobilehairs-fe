@@ -29,6 +29,20 @@ export const handleFetchVehicles = () => {
     }, [])
 }
 
+// GET USER'S VEHICLES
+export const handleFetchUsersVehicles = (user_id) => {
+    axios.get(`${process.env.ROOT_DB}/find_by`, user_id)
+    .then(res => {
+        console.log('users cars', res)
+        const vehiclesArray = res.data.data
+        return vehiclesArray
+    })
+    .catch(err => {
+        console.log('failed to get users cars', err)
+    })
+}
+
+
 export const handleDeleteVehicle = documentID => {
     return new Promise((resolve, reject) => {
         axios.delete(`https://ult-car-sales.herokuapp.com/vehicles/${documentID}`)

@@ -26,21 +26,26 @@ const Nav = () => {
         setState({subDisplay: 'none'})
     }
 
+    const handleLogout = e => {
+        dispatch(signOutUserSuccess) 
+    }
+
     return (
         <>
         <nav>
             <h4>Private Luxury Car Sales</h4>
             <ul>
                 <li><Link to='/'>Home</Link></li>
-                <li onMouseEnter={handleHover}><Link to='map'>About</Link></li>
-                <li onMouseEnter={handleHover}><Link to='search'>Explore</Link></li>
+                <li onMouseEnter={ handleHover }><Link to='map'>About</Link></li>
+                <li onMouseEnter={ handleHover }><Link to='search'>Explore</Link></li>
                 
                 {currentUser && (
                     <>
-                        <li onClick={ dispatch(signOutUserSuccess) }>
+                        <li><Link to='account'>My Account</Link></li>
+                        <li><Link to='sell' props={currentUser}>Sell</Link></li>
+                        <li onClick={ handleLogout }>
                             <Link to='/'>Logout</Link>
-                        </li>
-                        <li><Link to='sell'>Sell</Link></li>
+                        </li>                        
                     </>
                 )}
                 {!currentUser && (
