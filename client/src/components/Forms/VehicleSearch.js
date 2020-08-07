@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import RangeSlider from '../Slider'
 import { useHistory } from 'react-router-dom'
 
 const VehicleSearch = () => {
@@ -9,16 +8,12 @@ const VehicleSearch = () => {
         make: 'All',
         model: 'All',
         minPrice: 0,
-        maxPrixe: 10000
+        maxPrice: 500000
     })
 
     const handleSelect = e => {
         setOptions({...options, [e.target.name]: e.target.value})
     }
-
-    const handleSlider = e => {
-        setOptions({minPrice: e.target.min, maxPrice: e.target.max})
-    }  
 
     const handleSubmit = e => {
         history.push({
@@ -29,7 +24,7 @@ const VehicleSearch = () => {
                 model: options.model, 
                 isNew: options.isNew, 
                 minPrice: options.minPrice,
-                maxPrice: 500000
+                maxPrice: options.maxPrice
             }
         })
     }
@@ -62,13 +57,20 @@ const VehicleSearch = () => {
                 </select>
 
                 <p>Price Range</p>
-                <RangeSlider 
-                    min={options.minPrice} 
-                    max={options.maxPrice}
-                    rangeType={'Price'} 
-                    name='price'
-                    onChange={handleSlider}
-                />
+                <div className='price-range'>
+                    <p>from</p>
+                    <input 
+                        value={options.minPrice} 
+                        name='minPrice'
+                        onChange={handleSelect}
+                    />
+                    <p>to</p>
+                    <input 
+                        value={options.maxPrice}
+                        name='maxPrice'
+                        onChange={handleSelect}
+                    />
+                </div>
                 <button type='submit'>Search</button>
             </form>
         </section>

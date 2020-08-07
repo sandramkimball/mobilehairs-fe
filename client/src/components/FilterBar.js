@@ -2,34 +2,34 @@ import React, { useState } from 'react';
 import './FilterBar.scss';
 import { colorsList } from '../data/index.js';
 
-function FilterBar (props) {
+function FilterBar ({ options, vehicles }) {
     const [isSelected, setIsSelected] = useState('')
-    const [options, setOptions] = useState({
-        isNew: props.options.isNew || 'All',
-        make: props.options.make || 'All',
-        model: props.options.model || 'All',
+    const [filterOptions, setOptions] = useState({
+        isNew: options.isNew || 'All',
+        make: options.make || 'All',
+        model: options.model || 'All',
         year: '',
         body: 'All',
         color: 'All',
-        minPrice: props.options.minPrice || 0,
-        maxPrice: props.options.maxPrice || '',
+        minPrice: options.minPrice || 0,
+        maxPrice: options.maxPrice || '',
         minMiles: 0,
         maxMiles: '',
         minYear: '',
         maxYear: ''
     })
-    
+
     const handleSelect = e => {
         setOptions({ [e.target.name]: e.target.value})
     }
     
     const handleReset = e => {
         setOptions({
-            isNew: '',
+            isNew: 'All',
             make: 'All',
             model: 'All',
             minPrice: 0,
-            maxPrice: 10000,
+            maxPrice: 500000,
         })
 
     }
@@ -46,25 +46,25 @@ function FilterBar (props) {
         <section className='filter-bar'>
             {/* Dropdown options */}
             <p>New or Used?</p>
-            <select onChange={handleSelect} value={options.isNew}>
+            <select onChange={handleSelect} value={filterOptions.isNew}>
                 <option value={'All'}>All</option>
                 <option value='true'>New</option>
                 <option value='false'>Used</option>
             </select>
 
             <p>Make</p>
-            <select onChange={handleSelect} value={options.make}>
+            <select onChange={handleSelect} value={filterOptions.make}>
                 <option name='make' value='All'>All</option>
-                {props.vehicles.map((car, index)=> (
+                {vehicles.map((car, index)=> (
                     <option key={index} name='make' value={car.make}>{car.make}</option>
                 ))}
             </select> 
            
             <p>Model</p>
-            <select onChange={handleSelect} value={options.model}> 
+            <select onChange={handleSelect} value={filterOptions.model}> 
                 <option value='All'>All</option>
                 
-                {options.make != null && props.vehicles.map((car, index) => (
+                {options.make != null && vehicles.map((car, index) => (
                     <option key={index} value={car.model}>{car.model}</option>
                 ))}
             </select>
@@ -73,7 +73,7 @@ function FilterBar (props) {
             <p>Color</p>
             <fieldset className='select-color-checkboxes'>
                 <div className='list-container'>
-                    <ul value={options.color}>                        
+                    <ul value={filterOptions.color}>                        
                         {colorsList.map((color, index)=> (
                             <li key={index} className={isSelected} onClick={handleColorCheck}>
                                 <input value={color.toLowerCase()} type='checkbox'/>
@@ -87,22 +87,19 @@ function FilterBar (props) {
                 </div>
             </fieldset>
 
-            {/* Range Sliders */}
             <p>Price</p>
             <div className='option-range'>
                 <input 
                     type='text'
                     name='minPrice'
-                    value={options.minPrice}
-                    placeholder='0'
+                    value={filterOptions.minPrice}
                     onChange={handleSelect}
                 />
                 <p>to</p>
                 <input 
                     type='text'
                     name='maxPrice'
-                    value={options.maxPrice}
-                    placeholder='0'
+                    value={filterOptions.maxPrice}
                     onChange={handleSelect}
                 />
             </div>
@@ -112,7 +109,7 @@ function FilterBar (props) {
                 <input 
                     type='text'
                     name='minMiles'
-                    value={options.minMiles}
+                    value={filterOptions.minMiles}
                     placeholder='0'
                     onChange={handleSelect}
                 />
@@ -120,7 +117,7 @@ function FilterBar (props) {
                 <input 
                     type='text'
                     name='maxMiles'
-                    value={options.maxMiles}
+                    value={filterOptions.maxMiles}
                     placeholder='0'
                     onChange={handleSelect}
                 />
@@ -131,7 +128,7 @@ function FilterBar (props) {
                 <input 
                     type='text'
                     name='minYear'
-                    value={options.minYear}
+                    value={filterOptions.minYear}
                     placeholder='0'
                     onChange={handleSelect}
                 />
@@ -139,7 +136,7 @@ function FilterBar (props) {
                 <input 
                     type='text'
                     name='maxYear'
-                    value={options.maxYear}
+                    value={filterOptions.maxYear}
                     placeholder='0'
                     onChange={handleSelect}
                 />

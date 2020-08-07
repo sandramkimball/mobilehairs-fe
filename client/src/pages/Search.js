@@ -3,6 +3,7 @@ import axios from 'axios'
 import Card from '../components/Card'
 import FilterBar from '../components/FilterBar'
 import './Search.scss'
+import ReactLoading from 'react-loading'
 import { checkIsNew, checkModel, checkMake, checkPrice } from '../hoc/filterMiddleware';
 
 // Context & Reducers
@@ -21,44 +22,40 @@ const Search = props => {
         sortBy: 'Newest',
         resultsError: false,
         options: {
-            make: 'All',
-            model: 'All',
-            minPrice: 0,
-            maxPrice: 1000000,
-            isNew: 'All'
+            make: props.location.state.make || 'All',
+            model: props.location.state.model || 'All',
+            minPrice: props.location.state.minPrice || 0,
+            maxPrice: props.location.state.maxPrice || 500000,
+            isNew: props.location.state.isNew || 'All'
         }
     })
         
-    const handleSelect = e => { setState({sortBy: e.target.value}) }
+    const handleSelect = e => { 
+        e.preventDefault()
+        setState({ sortBy: e.target.value }) 
+    }
 
-    useEffect(()=> {        
+    useEffect(()=> {               
+        console.log('state.options', props.location.state) 
+        let vehicles = []  
         axios.get("https://ult-car-sales.herokuapp.com/vehicles")
         .then(res=> {
-            dispatch( setVehicles(res.data.data) )
+            let results = res.data.data      
+            results.forEach(car=> {
+                if(
+                    checkIsNew(car, state.options.isNew) &&
+                    checkPrice(car, state.options.minPrice, state.options.maxPrice) &&
+                    checkMake(car, state.options.make) &&
+                    checkModel(car, state.options.model)                
+                ){
+                    vehicles.push( car )
+                } 
+            })
+            dispatch( setVehicles(vehicles) ) 
         })
         .catch(err => {
-            console.log(err)
-        })
-
-        // Filter results:
-        // let results = []        
-        // vehicles.forEach(vehicle=> {
-        //     if(
-        //         checkPrice(vehicle, state.options.minPrice, state.options.maxPrice) === true &&
-        //         checkIsNew(vehicle, state.options.isNew) === true &&
-        //         checkMake(vehicle, state.options.make) == true &&
-        //         checkModel(vehicle, state.options.model)                
-        //     ){
-        //         results.push(vehicle)
-        //     }
-        // })
-
-        // Return results or set error
-        // if( results.length === 0 ){
-        //     setState({resultsError: true})
-        // } else {
-        //     setState({resultsError: false, vehicles: results})
-        // }        
+            console.log('Unable to make api call.', err)
+        })              
     }, [])
 
     return(
@@ -69,7 +66,7 @@ const Search = props => {
                 <div className='results-container'>
                     <div className='sort-by'>
                         <p>Sort By: </p>
-                        <select onChange={handleSelect} value={props.sortBy}>
+                        <select onChange={handleSelect} value={state.sortBy}>
                             <option value={'Newest'}>Newest</option>
                             <option value={'Year (Asc)'}>Year (Ascending)</option>
                             <option value={'Year (Desc)'}>Year (Descending)</option>
@@ -78,7 +75,14 @@ const Search = props => {
                         </select>
                     </div>
                     <div className='card-container'>
-                        {state.resultsError === true || !vehicles && (
+                        {state.resultsError === true && !vehicles && (
+                            <h4 className='search-error'>There was an error running your search.</h4>
+                        )}
+
+                        {state.resultsError === false && !vehicles && (
+                            <ReactLoading type={'cylon'} color={'gold'} height={'20%'} width={'20%'} />
+                        )}
+                        {state.resultsError === false && vehicles.length === 0 && (
                             <h4 className='search-error'> Your search results returned nothing.</h4>
                         )}
 

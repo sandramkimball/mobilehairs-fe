@@ -59,7 +59,7 @@ const MyAccount = () => {
     }, [])
 
     return (
-        <section>
+        <section className='my-account'>
             <div className='user-info'>
                 <h4>{`${currentUser.firstName} ${currentUser.lastName}`}</h4>
                 <h5>{currentUser.email}</h5>
