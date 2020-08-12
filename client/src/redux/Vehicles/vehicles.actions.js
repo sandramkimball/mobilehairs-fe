@@ -14,6 +14,11 @@ export const setVehicles = vehicles => ({
     payload: vehicles
 })
 
+export const setInventoryStats = stats => ({
+    type: vehiclesTypes.SET_INVENTORY_STATS,
+    payload: stats
+})
+
 export const deleteVehicleStart = vehicleID => ({
     type: vehiclesTypes.DELETE_VEHICLE_START,
     payload: vehicleID

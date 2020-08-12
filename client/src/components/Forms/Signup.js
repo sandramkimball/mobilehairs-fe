@@ -27,6 +27,7 @@ const SignUp = () => {
         email: '',
         password: '',
         confirmPassword: '',
+        avatar: '',
         errors: []
     })
 
@@ -43,7 +44,7 @@ const SignUp = () => {
             password: credentials.password,
             city: credentials.city,
             state: credentials.state,
-            isAdmin: false
+            avatar: credentials.avatar
         }
 
         //  Check if signup form is complete:
@@ -106,6 +107,13 @@ const SignUp = () => {
                     name='email'
                     value={credentials.email}
                     placeholder='Email'
+                    onChange={handleChange}
+                />    
+                <p>Profile Image</p>
+                <input 
+                    name='avatar'
+                    value={credentials.avatar}
+                    placeholder='URL'
                     onChange={handleChange}
                 />    
                 <div className='location'>  

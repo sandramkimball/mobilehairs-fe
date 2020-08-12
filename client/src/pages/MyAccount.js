@@ -61,12 +61,15 @@ const MyAccount = () => {
     return (
         <section className='my-account'>
             <div className='user-info'>
-                <h4>{`${currentUser.firstName} ${currentUser.lastName}`}</h4>
-                <h5>{currentUser.email}</h5>
-                <h5>{`${currentUser.city}, ${currentUser.state}`}</h5>
-                <div className='edit-user-btn'>
-                    <img src={require('../assets/edit-pen.png')}/>
-                </div>
+                <img src={currentUser.avatar} className='user-avatar'/>
+                <>
+                    <h4>{`${currentUser.firstName} ${currentUser.lastName}`}</h4>
+                    <h5>{currentUser.email}</h5>
+                    <h5>{`${currentUser.city}, ${currentUser.state}`}</h5>
+                    <div className='edit-user-btn'>
+                        <img src={require('../assets/edit-pen.png')}/>
+                    </div>
+                </>
             </div>
             
             <div className='user-cars'>

@@ -15,7 +15,7 @@ const mapState = ({ vehiclesData }) => ({
     vehicles: vehiclesData.vehicles
 })
 
-const Search = props => {
+const Search = ( props ) => {
     const dispatch = useDispatch();
     const { vehicles } = useSelector( mapState )
     const [ state, setState ] = useState({
@@ -35,8 +35,8 @@ const Search = props => {
         setState({ sortBy: e.target.value }) 
     }
 
-    useEffect(()=> {               
-        console.log('state.options', props.location.state) 
+    useEffect(()=> {     
+        console.log('form vals in search', props)          
         let vehicles = []  
         axios.get("https://ult-car-sales.herokuapp.com/vehicles")
         .then(res=> {

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import './App.scss'
+import './App.scss';
+import axios from 'axios';
 
 // State Management Context Providers
 import UserProvider from './redux/User/user.context'
@@ -23,6 +24,7 @@ import MyAccount from './pages/MyAccount';
 
 
 function App() {
+
     return (
         <div className='App'>
             <UserProvider>

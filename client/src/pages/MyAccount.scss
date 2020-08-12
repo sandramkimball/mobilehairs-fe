@@ -13,6 +13,12 @@
     font-family: $font-1;
     text-align: left;
     margin: 10px auto;
+    display: flex;
+    img{
+        height: 150px;
+        width: 150px;
+        object-fit: contain;
+    }
 }
 
 .user-cars{

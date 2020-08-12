@@ -16,6 +16,8 @@
     };
     .vehicle-search{
         width: 40vw;
+        height: 55vh;
+        min-height: 0 !important;
         display: flex;
         flex-direction: column;
         align-content: center;
@@ -29,7 +31,8 @@
         }
         form{
             margin: auto;
-            width: 100%
+            width: 100%;
+            height: 100%;
         }
         form select{
             width: 60%;

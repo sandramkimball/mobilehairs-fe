@@ -1,15 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 
-const VehicleSearch = () => {
+const VehicleSearch = ({ inventoryStats }) => {
     const history = useHistory()
     const [options, setOptions] = useState({
         isNew: 'All',
         make: 'All',
         model: 'All',
         minPrice: 0,
-        maxPrice: 500000
+        maxPrice: 1000000
     })
+
+    const [availableVals, setAvailableVals] = useState({
+        makes: [],
+        models: [] || availableVals.makes[options.make],
+        maxPrice: 0,
+        years: []
+    })
+
+    useEffect(()=>{
+        console.log('BIGstats', inventoryStats)
+        if(inventoryStats.length === 0 ){
+            console.log('awaiting data')            
+        }
+        else {
+            console.log('stats', inventoryStats)
+            let mostExpensive = Object.values(inventoryStats[2])
+            let years = Object.values(inventoryStats[1])
+            let allMakes = inventoryStats[0]
+ 
+            setAvailableVals({
+                makes: allMakes,
+                maxPrice: mostExpensive,
+                years: years
+            })
+        }
+    }, [])
 
     const handleSelect = e => {
         setOptions({...options, [e.target.name]: e.target.value})
@@ -43,17 +69,17 @@ const VehicleSearch = () => {
                 <p>Make</p>
                 <select name='make' value={options.make} onChange={handleSelect}>
                     <option name='make' value={'All'}>All Makes</option>
-                    <option name='make' value={'Dodge'}>Dodge</option>
-                    <option name='make' value={'Mazda'}>Mazda</option>
-                    <option name='make' value={'BMW'}>BMW</option>
+                    {availableVals.makes.map( car => (
+                        <option name='make' value={car}>{car}</option>
+                    ))}
                 </select> 
 
                 <p>Model</p>
                 <select name='model' value={options.model} onChange={handleSelect}>
-                    <option name='model' value={'All'}>All Models</option>
-                    <option name='model' value='Ram 1500'>Ram 1500</option>
-                    <option name='model' value='Mazda3'>Mazda3</option>
-                    <option name='model' value='4-Series'>4-Series</option>                    
+                    <option name='model' value={'All'}>--</option>
+                    {availableVals && availableVals.models.map( car => (
+                        <option name='model' value={car}>{car}</option>
+                    ))}
                 </select>
 
                 <p>Price Range</p>

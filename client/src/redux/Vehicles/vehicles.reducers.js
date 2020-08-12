@@ -1,7 +1,8 @@
 import vehiclesTypes from './vehicles.types'
 
 export const INITIAL_STATE = {
-    vehicles: []
+    vehicles: [],
+    inventoryStats:[]
 }
 
 const vehiclesReducer = (state = INITIAL_STATE, action) => {
@@ -10,6 +11,11 @@ const vehiclesReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 vehicles: action.payload
+            }
+        case vehiclesTypes.SET_INVENTORY_STATS:
+            return {
+                ...state,
+                inventoryStats: action.payload
             }
         default:
             return state
