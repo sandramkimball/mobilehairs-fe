@@ -13,25 +13,26 @@ const VehicleSearch = ({ inventoryStats }) => {
 
     const [availableVals, setAvailableVals] = useState({
         makes: [],
-        models: [] || availableVals.makes[options.make],
+        models: [],
         maxPrice: 0,
-        years: []
+        years: [1959, 2020]
     })
 
     useEffect(()=>{
-        console.log('BIGstats', inventoryStats)
         if(inventoryStats.length === 0 ){
             console.log('awaiting data')            
         }
         else {
-            console.log('stats', inventoryStats)
+            console.log("Inventory Stats!", inventoryStats)
             let mostExpensive = Object.values(inventoryStats[2])
             let years = Object.values(inventoryStats[1])
             let allMakes = inventoryStats[0]
+        
  
             setAvailableVals({
                 makes: allMakes,
                 maxPrice: mostExpensive,
+                models: "Ferfrari",
                 years: years
             })
         }

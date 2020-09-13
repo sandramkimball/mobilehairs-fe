@@ -4,10 +4,11 @@ import { colorsList } from '../data/index.js';
 
 function FilterBar ({ options, vehicles }) {
     const [isSelected, setIsSelected] = useState('')
+    var [allModels, setAllModels] = useState(null)
     const [filterOptions, setOptions] = useState({
         isNew: options.isNew || 'All',
         make: options.make || 'All',
-        model: options.model || 'All',
+        model: 'All',
         year: '',
         body: 'All',
         color: 'All',
@@ -19,8 +20,22 @@ function FilterBar ({ options, vehicles }) {
         maxYear: ''
     })
 
+
     const handleSelect = e => {
         setOptions({ [e.target.name]: e.target.value})
+    }
+    const handleMakeSelect = e => {
+        setOptions({ make: e.target.value})
+
+        // set models
+        let temp = ['All']
+        vehicles.map( car => {
+            if(car.make === e.target.value){
+                temp.push(car.model)
+            }
+        })
+        console.log('temp', temp)
+        setAllModels(temp);
     }
     
     const handleReset = e => {
@@ -39,21 +54,21 @@ function FilterBar ({ options, vehicles }) {
     }
 
     const handleSubmit = e => {
-        console.log('how to get the search results to respond!')
+        console.log(filterOptions)
     }
 
     return (
         <section className='filter-bar'>
             {/* Dropdown options */}
             <p>New or Used?</p>
-            <select onChange={handleSelect} value={filterOptions.isNew}>
+            <select onChange={handleSelect} name='isNew'>
                 <option value={'All'}>All</option>
                 <option value='true'>New</option>
                 <option value='false'>Used</option>
             </select>
 
             <p>Make</p>
-            <select onChange={handleSelect} value={filterOptions.make}>
+            <select onChange={handleMakeSelect} name='make'>
                 <option name='make' value='All'>All</option>
                 {vehicles.map((car, index)=> (
                     <option key={index} name='make' value={car.make}>{car.make}</option>
@@ -61,11 +76,13 @@ function FilterBar ({ options, vehicles }) {
             </select> 
            
             <p>Model</p>
-            <select onChange={handleSelect} value={filterOptions.model}> 
-                <option value='All'>All</option>
+            <select onChange={handleSelect} name='model'> 
+                {allModels == null && (
+                    <option name='model' value='All'>--</option>
+                )}
                 
-                {options.make != null && vehicles.map((car, index) => (
-                    <option key={index} value={car.model}>{car.model}</option>
+                {allModels != null && allModels.map((car, index) => (
+                   <option key={index} name="model" value={car}>{car}</option>
                 ))}
             </select>
 
@@ -143,7 +160,7 @@ function FilterBar ({ options, vehicles }) {
             </div>
         
             <div style={{display: 'flex', margin: 'auto'}}>
-                <button type='submit' onSubmit={handleSubmit}>Submit</button>
+                <button type='submit' onClick={handleSubmit}>Submit</button>
                 <button onClick={handleReset}>Reset</button>
             </div>
             

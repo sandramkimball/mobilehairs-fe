@@ -12,6 +12,11 @@ const vehiclesReducer = (state = INITIAL_STATE, action) => {
                 ...state,
                 vehicles: action.payload
             }
+        case vehiclesTypes.SEARCH_VEHICLES:
+            return {
+                ...state,
+                vehicles: action.payload
+            }
         case vehiclesTypes.SET_INVENTORY_STATS:
             return {
                 ...state,

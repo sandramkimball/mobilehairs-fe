@@ -22,11 +22,11 @@ const Search = ( props ) => {
         sortBy: 'Newest',
         resultsError: false,
         options: {
-            make: props.location.state.make || 'All',
-            model: props.location.state.model || 'All',
-            minPrice: props.location.state.minPrice || 0,
-            maxPrice: props.location.state.maxPrice || 500000,
-            isNew: props.location.state.isNew || 'All'
+            make: 'All',
+            model: 'All',
+            minPrice: 0,
+            maxPrice: 500000,
+            isNew: 'All'
         }
     })
         
@@ -35,9 +35,21 @@ const Search = ( props ) => {
         setState({ sortBy: e.target.value }) 
     }
 
-    useEffect(()=> {     
-        console.log('form vals in search', props)          
+    useEffect(()=> {              
         let vehicles = []  
+
+        // First check props:
+        if(!props.location.state == null){
+            setState( {options: {
+                make: props.location.state.make || 'All',
+                model: props.location.state.model || 'All',
+                minPrice: props.location.state.minPrice || 0,
+                maxPrice: props.location.state.maxPrice || 500000,
+                isNew: props.location.state.isNew || 'All'
+            }})
+        }
+
+        // Make api call:
         axios.get("https://ult-car-sales.herokuapp.com/vehicles")
         .then(res=> {
             let results = res.data.data      

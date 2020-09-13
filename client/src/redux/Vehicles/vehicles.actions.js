@@ -1,5 +1,10 @@
 import vehiclesTypes from './vehicles.types'
 
+export const searchVehicles = vehicleData => ({
+    type: vehiclesTypes.SEARCH_VEHICLES,
+    payload: vehicleData
+})
+
 export const addVehicleStart = vehicleData => ({
     type: vehiclesTypes.ADD_VEHICLE_START,
     payload: vehicleData
