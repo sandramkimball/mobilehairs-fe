@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import './Home.scss';
 import VehicleSearch from '../components/Forms/VehicleSearch';
@@ -13,15 +13,15 @@ const mapState = ({ vehiclesData }) => ({
 
 const Home = () => {
     const dispatch = useDispatch();
-    const { inventoryStats } = useSelector( mapState )
+    const { inventoryStats } = useSelector( mapState );
 
     useEffect(()=>{
         axios.get(`https://ult-car-sales.herokuapp.com/data`)
         .then(res=> {
-            dispatch( setInventoryStats( res.data.data) )
+            dispatch( setInventoryStats(res.data.data) )
         })
         .catch(err=> {
-            console.log('no data', err)
+            console.log('No Data Received.', err)
         })
     }, [])
 
@@ -29,7 +29,7 @@ const Home = () => {
         <section className='home'>
             <div className='banner-1'>
                 <div className='banner-img1'/>
-                <VehicleSearch inventoryStats={inventoryStats}/>
+                <VehicleSearch stats={inventoryStats}/>
             </div>
             <div className='banner-2'>
                 <div className='category tag1'><div className='overlay'><p>Classic</p></div></div>

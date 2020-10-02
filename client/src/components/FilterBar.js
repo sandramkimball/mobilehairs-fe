@@ -24,6 +24,7 @@ function FilterBar ({ options, vehicles }) {
     const handleSelect = e => {
         setOptions({ [e.target.name]: e.target.value})
     }
+    
     const handleMakeSelect = e => {
         setOptions({ make: e.target.value})
 
@@ -34,7 +35,6 @@ function FilterBar ({ options, vehicles }) {
                 temp.push(car.model)
             }
         })
-        console.log('temp', temp)
         setAllModels(temp);
     }
     
