@@ -59,7 +59,6 @@ function FilterBar ({ options, vehicles }) {
 
     return (
         <section className='filter-bar'>
-            {/* Dropdown options */}
             <p>New or Used?</p>
             <select onChange={handleSelect} name='isNew'>
                 <option value={'All'}>All</option>
@@ -86,7 +85,6 @@ function FilterBar ({ options, vehicles }) {
                 ))}
             </select>
 
-            {/* Checkbox options */}
             <p>Color</p>
             <fieldset className='select-color-checkboxes'>
                 <div className='list-container'>

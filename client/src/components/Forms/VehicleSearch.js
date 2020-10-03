@@ -91,7 +91,7 @@ const VehicleSearch = (stats) => {
                 <select name='make' value={selected.make} onChange={handleSelectMake}>
                     <option name='make' value={'All'}>All Makes</option>
                     {availableOpts.makes && availableOpts.makes.map( car => (
-                        <option name='make' value={car}>{car}</option>
+                        <option name='make' key={availableOpts.makes.indexOf(car)} value={car}>{car}</option>
                     ))}
                 </select> 
 
@@ -121,6 +121,7 @@ const VehicleSearch = (stats) => {
                         onChange={handleSelect}
                     />
                 </div>
+                
                 <button type='submit'>Search</button>
             </form>
         </section>
